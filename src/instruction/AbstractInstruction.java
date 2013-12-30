@@ -19,6 +19,10 @@ public abstract class AbstractInstruction {
 	 */
 	public abstract int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex);
 	
+	protected int getBytecodeIndex(int bytecodeIndex) {
+		return bytecodeIndex;
+	}
+	
 	protected void checkInteger(Reference reference) {
 		if (!(reference.getObject() instanceof IntegerObject)) {
 			throw new IllegalStateException("Object has to be integer.");

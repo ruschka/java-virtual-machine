@@ -1,11 +1,7 @@
 package instruction.integer.istore;
 
-import instruction.AbstractInstruction;
-import object.Heap;
-import object.Reference;
-import enviroment.Frame;
 
-public class Istore1Instruction extends AbstractInstruction {
+public class Istore1Instruction extends AbstractIstoreInstruction {
 	
 	public static final String OPCODE = "3C";
 
@@ -15,11 +11,8 @@ public class Istore1Instruction extends AbstractInstruction {
 	}
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
-		Reference reference = frame.pop();
-		checkInteger(reference);
-		frame.setLocal(1, reference);
-		return bytecodeIndex;
+	protected int getStoreIndex(byte[] bytecode, int bytecodeIndex) {
+		return 1;
 	}
 
 }
