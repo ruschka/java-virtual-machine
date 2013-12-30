@@ -1,6 +1,5 @@
 package enviroment;
 
-import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
 
@@ -26,9 +25,9 @@ public class Controller {
 
 	public void run() {
 		try {
-			mainClass = Repository.lookupClass(mainClassName);
+			mainClass = ClassLoader.loadClass(mainClassName);
 			Method mainMethod = getMainMethod();
-			Frame frame = new Frame(null, mainMethod.getCode().getMaxLocals());
+			Frame frame = new Frame(null, mainClass.getConstantPool(), mainMethod.getCode().getMaxLocals());
 			Heap heap = new Heap();
 			MethodRunner methodRunner = new MethodRunner(mainMethod, frame, heap);
 			methodRunner.run();

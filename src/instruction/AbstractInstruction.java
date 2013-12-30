@@ -23,6 +23,10 @@ public abstract class AbstractInstruction {
 		return bytecodeIndex;
 	}
 	
+	protected int getIntegerFromNextTwoBytes(byte[] bytecode, int bytecodeIndex) {
+		return (((int)bytecode[bytecodeIndex]) << 8) + bytecode[bytecodeIndex + 1];
+	}
+	
 	protected void checkInteger(Reference reference) {
 		if (!(reference.getObject() instanceof IntegerObject)) {
 			throw new IllegalStateException("Object has to be integer.");

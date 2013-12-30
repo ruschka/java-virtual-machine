@@ -2,6 +2,9 @@ package enviroment;
 
 import java.util.LinkedList;
 
+import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantPool;
+
 import object.Reference;
 
 public class Frame {
@@ -9,11 +12,13 @@ public class Frame {
 	private Frame parent;
 	private LinkedList<Reference> stack = new LinkedList<Reference>();
 	private Reference[] localVariables;
+	private ConstantPool constantPool;
 	
-	public Frame(Frame parent, int countOfLocals) {
+	public Frame(Frame parent, ConstantPool constantPool, int countOfLocals) {
 		super();
 		this.parent = parent;
-		localVariables = new Reference[countOfLocals];
+		this.constantPool = constantPool;
+		this.localVariables = new Reference[countOfLocals];
 	}
 	
 	public Frame getParent() {
@@ -34,6 +39,10 @@ public class Frame {
 	
 	public Reference getLocal(int index) {
 		return localVariables[index];
+	}
+	
+	public Constant getConstant(int index) {
+		return constantPool.getConstant(index);
 	}
 
 }

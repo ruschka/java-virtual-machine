@@ -19,6 +19,7 @@ import instruction.integer.istore.Istore1Instruction;
 import instruction.integer.istore.Istore2Instruction;
 import instruction.integer.istore.Istore3Instruction;
 import instruction.integer.istore.IstoreInstruction;
+import instruction.object.NewInstruction;
 import instruction.returns.ReturnInstruction;
 
 import java.util.HashMap;
@@ -53,6 +54,8 @@ public class InstructionPool {
 		INSTRUCTIONS.put(IdivInstruction.OPCODE, new IdivInstruction());
 		
 		INSTRUCTIONS.put(ReturnInstruction.OPCODE, new ReturnInstruction());
+		
+		INSTRUCTIONS.put(NewInstruction.OPCODE, new NewInstruction());
 	}
 	
 	public static final AbstractInstruction getInstruction(byte b) {
