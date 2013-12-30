@@ -1,6 +1,8 @@
 package instruction;
 
 import instruction.integer.iarithmetic.IaddInstruction;
+import instruction.integer.iarithmetic.IdivInstruction;
+import instruction.integer.iarithmetic.ImulInstruction;
 import instruction.integer.iarithmetic.IsubInstruction;
 import instruction.integer.iconst.Iconst0Instruction;
 import instruction.integer.iconst.Iconst1Instruction;
@@ -16,6 +18,8 @@ import instruction.integer.istore.Istore0Instruction;
 import instruction.integer.istore.Istore1Instruction;
 import instruction.integer.istore.Istore2Instruction;
 import instruction.integer.istore.Istore3Instruction;
+import instruction.integer.istore.IstoreInstruction;
+import instruction.returns.ReturnInstruction;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +40,7 @@ public class InstructionPool {
 		INSTRUCTIONS.put(Istore1Instruction.OPCODE, new Istore1Instruction());
 		INSTRUCTIONS.put(Istore2Instruction.OPCODE, new Istore2Instruction());
 		INSTRUCTIONS.put(Istore3Instruction.OPCODE, new Istore3Instruction());
+		INSTRUCTIONS.put(IstoreInstruction.OPCODE, new IstoreInstruction());
 		
 		INSTRUCTIONS.put(Iload0Instruction.OPCODE, new Iload0Instruction());
 		INSTRUCTIONS.put(Iload1Instruction.OPCODE, new Iload1Instruction());
@@ -44,6 +49,10 @@ public class InstructionPool {
 		
 		INSTRUCTIONS.put(IaddInstruction.OPCODE, new IaddInstruction());
 		INSTRUCTIONS.put(IsubInstruction.OPCODE, new IsubInstruction());
+		INSTRUCTIONS.put(ImulInstruction.OPCODE, new ImulInstruction());
+		INSTRUCTIONS.put(IdivInstruction.OPCODE, new IdivInstruction());
+		
+		INSTRUCTIONS.put(ReturnInstruction.OPCODE, new ReturnInstruction());
 	}
 	
 	public static final AbstractInstruction getInstruction(byte b) {
