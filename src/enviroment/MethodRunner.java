@@ -2,7 +2,6 @@ package enviroment;
 
 import instruction.AbstractInstruction;
 import instruction.InstructionPool;
-import object.Heap;
 
 import org.apache.bcel.classfile.Method;
 
@@ -24,7 +23,7 @@ public class MethodRunner {
 		byte[] bytecode = method.getCode().getCode();
 		while (bytecodeIndex < bytecode.length) {
 			AbstractInstruction instruction = InstructionPool.getInstruction(bytecode[bytecodeIndex++]);
-			instruction.run(frame, heap, bytecode, bytecodeIndex);
+			bytecodeIndex = instruction.run(frame, heap, bytecode, bytecodeIndex);
 		}
 	}
 

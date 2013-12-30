@@ -1,7 +1,5 @@
 package enviroment;
 
-import object.Heap;
-
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;

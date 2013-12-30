@@ -1,9 +1,9 @@
 package instruction.integer.iload;
 
 import instruction.AbstractInstruction;
-import object.Heap;
 import object.Reference;
 import enviroment.Frame;
+import enviroment.Heap;
 
 public class Iload0Instruction extends AbstractInstruction {
 	

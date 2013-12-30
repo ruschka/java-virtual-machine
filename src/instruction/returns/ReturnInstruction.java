@@ -1,7 +1,7 @@
 package instruction.returns;
 
-import object.Heap;
 import enviroment.Frame;
+import enviroment.Heap;
 import instruction.AbstractInstruction;
 
 public class ReturnInstruction extends AbstractInstruction {

@@ -1,9 +1,9 @@
 package instruction.integer.iarithmetic;
 
-import object.Heap;
 import object.IntegerObject;
 import object.Reference;
 import enviroment.Frame;
+import enviroment.Heap;
 import instruction.AbstractInstruction;
 
 public abstract class IArithmeticInstruction extends AbstractInstruction {

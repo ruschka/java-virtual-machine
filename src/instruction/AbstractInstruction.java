@@ -1,9 +1,9 @@
 package instruction;
 
-import object.Heap;
 import object.IntegerObject;
 import object.Reference;
 import enviroment.Frame;
+import enviroment.Heap;
 
 public abstract class AbstractInstruction {
 	

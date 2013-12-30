@@ -1,10 +1,10 @@
 package instruction.integer.iconst;
 
 import instruction.AbstractInstruction;
-import object.Heap;
 import object.IntegerObject;
 import object.Reference;
 import enviroment.Frame;
+import enviroment.Heap;
 
 /**
  * instrukce iconst_3

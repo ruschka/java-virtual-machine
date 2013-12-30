@@ -1,8 +1,8 @@
 package instruction.integer.istore;
 
-import object.Heap;
 import object.Reference;
 import enviroment.Frame;
+import enviroment.Heap;
 import instruction.AbstractInstruction;
 
 public abstract class AbstractIstoreInstruction extends AbstractInstruction {
