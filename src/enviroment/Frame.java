@@ -9,6 +9,11 @@ import object.Reference;
 
 public class Frame {
 	
+	/**
+	 * this je lokalni promenna s indexem 0.
+	 */
+	public static final int THIS = 0;
+	
 	private Frame parent;
 	private LinkedList<Reference> stack = new LinkedList<Reference>();
 	private Reference[] localVariables;

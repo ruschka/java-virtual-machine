@@ -24,26 +24,12 @@ public class Controller {
 	}
 
 	public void run() {
-		try {
-			mainClass = ClassLoader.loadClass(mainClassName);
-			Method mainMethod = getMainMethod();
-			Frame frame = new Frame(null, mainClass.getConstantPool(), mainMethod.getCode().getMaxLocals());
-			Heap heap = new Heap();
-			MethodRunner methodRunner = new MethodRunner(mainMethod, frame, heap);
-			methodRunner.run();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	private Method getMainMethod() {
-		Method[] methods = mainClass.getMethods();
-		for (Method method : methods) {
-			if (MAIN_METHOD_NAME.equals(method.getName())) {
-				return method;
-			}
-		}
-		throw new IllegalStateException("Main method not found.");
+		mainClass = ClassLoader.loadClass(mainClassName);
+		Method mainMethod = ClassLoader.getMethodByName(mainClass, MAIN_METHOD_NAME);
+		Frame frame = new Frame(null, mainClass.getConstantPool(), mainMethod.getCode().getMaxLocals());
+		Heap heap = new Heap();
+		MethodRunner methodRunner = new MethodRunner(mainMethod, frame, heap);
+		methodRunner.run();
 	}
 
 }

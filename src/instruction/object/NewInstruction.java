@@ -29,12 +29,7 @@ public class NewInstruction extends AbstractInstruction {
 		int nameIndex = ((ConstantClass)constant).getNameIndex();
 		Constant nameConstant = frame.getConstant(nameIndex);
 		String className = ((ConstantUtf8)nameConstant).getBytes();
-		JavaClass loadedClass = null;
-		try {
-			 loadedClass = ClassLoader.loadClass(className);
-		} catch (ClassNotFoundException e) {
-			throw new IllegalStateException("Class " + className + " not found.", e);
-		}
+		JavaClass loadedClass = ClassLoader.loadClass(className);
 		JavaObject object = new JavaObject(loadedClass);
 		heap.addObject(object);
 		frame.push(new Reference(object));
