@@ -1,21 +1,20 @@
-package instruction.integer.istore;
+package instruction.object.astore;
 
 import instruction.store.Store2Instruction;
 import object.Reference;
 
-
-public class Istore2Instruction extends Store2Instruction {
+public class Astore2Instruction extends Store2Instruction {
 	
-	public static final String OPCODE = "3D";
+	public static final String OPCODE = "4D";
 
 	@Override
 	public String getOpcode() {
 		return OPCODE;
 	}
-
+	
 	@Override
 	protected void checkType(Reference reference) {
-		checkInteger(reference);
+		checkObject(reference);
 	}
 
 }

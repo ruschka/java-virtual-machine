@@ -1,22 +1,18 @@
 package instruction.object;
 
-import object.JavaObject;
-import object.Reference;
+import instruction.AbstractInstruction;
 
-import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantMethodref;
 import org.apache.bcel.classfile.ConstantNameAndType;
 import org.apache.bcel.classfile.ConstantUtf8;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
-import org.apache.bcel.generic.Type;
 
 import enviroment.ClassLoader;
 import enviroment.Frame;
 import enviroment.Heap;
 import enviroment.MethodRunner;
-import instruction.AbstractInstruction;
 
 public class InvokeSpecialInstruction extends AbstractInstruction {
 	

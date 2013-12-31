@@ -1,6 +1,7 @@
 package instruction;
 
 import object.IntegerObject;
+import object.JavaObject;
 import object.Reference;
 import enviroment.Frame;
 import enviroment.Heap;
@@ -30,6 +31,12 @@ public abstract class AbstractInstruction {
 	protected void checkInteger(Reference reference) {
 		if (!(reference.getObject() instanceof IntegerObject)) {
 			throw new IllegalStateException("Object has to be integer.");
+		}
+	}
+	
+	protected void checkObject(Reference reference) {
+		if (!(reference.getObject() instanceof JavaObject)) {
+			throw new IllegalStateException("Object has to be java object.");
 		}
 	}
 

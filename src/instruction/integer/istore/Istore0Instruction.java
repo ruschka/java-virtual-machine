@@ -1,7 +1,9 @@
 package instruction.integer.istore;
 
+import instruction.store.Store0Instruction;
+import object.Reference;
 
-public class Istore0Instruction extends AbstractIstoreInstruction {
+public class Istore0Instruction extends Store0Instruction {
 	
 	public static final String OPCODE = "3B";
 
@@ -11,8 +13,8 @@ public class Istore0Instruction extends AbstractIstoreInstruction {
 	}
 
 	@Override
-	protected int getStoreIndex(byte[] bytecode, int bytecodeIndex) {
-		return 0;
+	protected void checkType(Reference reference) {
+		checkInteger(reference);		
 	}
 
 }

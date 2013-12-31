@@ -1,20 +1,22 @@
-package instruction.integer.istore;
+package instruction.store;
 
+import instruction.AbstractInstruction;
 import object.Reference;
 import enviroment.Frame;
 import enviroment.Heap;
-import instruction.AbstractInstruction;
 
-public abstract class AbstractIstoreInstruction extends AbstractInstruction {
+public abstract class AbstractStoreInstruction extends AbstractInstruction {
 
 	@Override
 	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
 		Reference reference = frame.pop();
-		checkInteger(reference);
+		checkType(reference);
 		frame.setLocal(getStoreIndex(bytecode, bytecodeIndex), reference);
 		return getBytecodeIndex(bytecodeIndex);
 	}
 	
 	protected abstract int getStoreIndex(byte[] bytecode, int bytecodeIndex);
+	
+	protected abstract void checkType(Reference reference);
 
 }
