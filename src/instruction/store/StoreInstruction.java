@@ -5,12 +5,12 @@ public abstract class StoreInstruction extends AbstractStoreInstruction {
 
 	@Override
 	protected int getStoreIndex(byte[] bytecode, int bytecodeIndex) {
-		return bytecode[bytecodeIndex];
+		return getIntegerFormNextByte(bytecode, bytecodeIndex);
 	}
 	
 	@Override
 	protected int getBytecodeIndex(int bytecodeIndex) {
-		return bytecodeIndex + 1;
+		return bytecodeIndex + 2;
 	}
 	
 }

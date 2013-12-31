@@ -56,7 +56,7 @@ public class InvokeVirtualInstruction extends InvokeMethodInstruction {
 	
 	@Override
 	protected int getBytecodeIndex(int bytecodeIndex) {
-		return bytecodeIndex + 2;
+		return bytecodeIndex + 3;
 	}
 
 }

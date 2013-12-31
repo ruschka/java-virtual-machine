@@ -38,7 +38,7 @@ public class NewInstruction extends AbstractInstruction {
 	
 	@Override
 	protected int getBytecodeIndex(int bytecodeIndex) {
-		return bytecodeIndex + 2;
+		return bytecodeIndex + 3;
 	}
 
 }

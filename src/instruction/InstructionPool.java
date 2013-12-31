@@ -1,5 +1,6 @@
 package instruction;
 
+import instruction.condition.IfIcmpleInstruction;
 import instruction.integer.iarithmetic.IaddInstruction;
 import instruction.integer.iarithmetic.IdivInstruction;
 import instruction.integer.iarithmetic.ImulInstruction;
@@ -91,6 +92,8 @@ public class InstructionPool {
 		
 		INSTRUCTIONS.put(DupInstruction.OPCODE, new DupInstruction());
 		INSTRUCTIONS.put(PopInstruction.OPCODE, new PopInstruction());
+		
+		INSTRUCTIONS.put(IfIcmpleInstruction.OPCODE, new IfIcmpleInstruction());
 	}
 	
 	public static final AbstractInstruction getInstruction(byte b) {

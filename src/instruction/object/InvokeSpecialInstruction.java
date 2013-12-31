@@ -51,7 +51,7 @@ public class InvokeSpecialInstruction extends InvokeMethodInstruction {
 	
 	@Override
 	protected int getBytecodeIndex(int bytecodeIndex) {
-		return bytecodeIndex + 2;
+		return bytecodeIndex + 3;
 	}
 
 }

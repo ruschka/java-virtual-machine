@@ -22,7 +22,7 @@ public class MethodRunner {
 		int bytecodeIndex = 0;
 		byte[] bytecode = method.getCode().getCode();
 		while (bytecodeIndex < bytecode.length) {
-			AbstractInstruction instruction = InstructionPool.getInstruction(bytecode[bytecodeIndex++]);
+			AbstractInstruction instruction = InstructionPool.getInstruction(bytecode[bytecodeIndex]);
 			bytecodeIndex = instruction.run(frame, heap, bytecode, bytecodeIndex);
 		}
 	}

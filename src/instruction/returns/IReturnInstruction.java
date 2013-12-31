@@ -5,6 +5,11 @@ import enviroment.Frame;
 import enviroment.Heap;
 import instruction.AbstractInstruction;
 
+/**
+ * http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html#jvms-6.5.ireturn
+ * @author ruschka
+ *
+ */
 public class IReturnInstruction extends AbstractInstruction {
 	
 	public static final String OPCODE = "AC";

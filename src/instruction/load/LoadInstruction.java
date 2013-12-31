@@ -5,12 +5,12 @@ public abstract class LoadInstruction extends AbstractLoadInstruction {
 
 	@Override
 	protected int getLoadIndex(byte[] bytecode, int bytecodeIndex) {
-		return bytecode[bytecodeIndex];
+		return getIntegerFormNextByte(bytecode, bytecodeIndex);
 	}
 	
 	@Override
 	protected int getBytecodeIndex(int bytecodeIndex) {
-		return bytecodeIndex + 1;  
+		return bytecodeIndex + 2;  
 	}
 	
 }

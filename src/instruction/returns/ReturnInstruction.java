@@ -15,7 +15,7 @@ public class ReturnInstruction extends AbstractInstruction {
 
 	@Override
 	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
-		return bytecodeIndex;
+		return getBytecodeIndex(bytecodeIndex);
 	}
 
 }

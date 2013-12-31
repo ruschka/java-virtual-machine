@@ -21,11 +21,15 @@ public abstract class AbstractInstruction {
 	public abstract int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex);
 	
 	protected int getBytecodeIndex(int bytecodeIndex) {
-		return bytecodeIndex;
+		return bytecodeIndex + 1;
+	}
+	
+	protected int getIntegerFormNextByte(byte[] bytecode, int bytecodeIndex) {
+		return (int)bytecode[bytecodeIndex + 1];
 	}
 	
 	protected int getIntegerFromNextTwoBytes(byte[] bytecode, int bytecodeIndex) {
-		return (((int)bytecode[bytecodeIndex]) << 8) + bytecode[bytecodeIndex + 1];
+		return (((int)bytecode[bytecodeIndex + 1]) << 8) + bytecode[bytecodeIndex + 2];
 	}
 	
 	protected void checkInteger(Reference reference) {

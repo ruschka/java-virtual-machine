@@ -19,7 +19,7 @@ public class DupInstruction extends AbstractInstruction {
 		Reference reference = frame.pop();
 		frame.push(reference);
 		frame.push(reference);
-		return bytecodeIndex;
+		return getBytecodeIndex(bytecodeIndex);
 	}
 
 }

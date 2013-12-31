@@ -25,7 +25,7 @@ public class Iconst3Instruction extends AbstractInstruction {
 		IntegerObject object = new IntegerObject(3);
 		heap.addObject(object);
 		frame.push(new Reference(object));
-		return bytecodeIndex;
+		return getBytecodeIndex(bytecodeIndex);
 	}
 
 }
