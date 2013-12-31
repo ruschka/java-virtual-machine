@@ -14,6 +14,7 @@ import instruction.integer.iload.Iload0Instruction;
 import instruction.integer.iload.Iload1Instruction;
 import instruction.integer.iload.Iload2Instruction;
 import instruction.integer.iload.Iload3Instruction;
+import instruction.integer.iload.IloadInstruction;
 import instruction.integer.istore.Istore0Instruction;
 import instruction.integer.istore.Istore1Instruction;
 import instruction.integer.istore.Istore2Instruction;
@@ -21,6 +22,16 @@ import instruction.integer.istore.Istore3Instruction;
 import instruction.integer.istore.IstoreInstruction;
 import instruction.object.InvokeSpecialInstruction;
 import instruction.object.NewInstruction;
+import instruction.object.aload.Aload0Instruction;
+import instruction.object.aload.Aload1Instruction;
+import instruction.object.aload.Aload2Instruction;
+import instruction.object.aload.Aload3Instruction;
+import instruction.object.aload.AloadInstruction;
+import instruction.object.astore.Astore0Instruction;
+import instruction.object.astore.Astore1Instruction;
+import instruction.object.astore.Astore2Instruction;
+import instruction.object.astore.Astore3Instruction;
+import instruction.object.astore.AstoreInstruction;
 import instruction.returns.ReturnInstruction;
 import instruction.util.DupInstruction;
 
@@ -49,11 +60,24 @@ public class InstructionPool {
 		INSTRUCTIONS.put(Iload1Instruction.OPCODE, new Iload1Instruction());
 		INSTRUCTIONS.put(Iload2Instruction.OPCODE, new Iload2Instruction());
 		INSTRUCTIONS.put(Iload3Instruction.OPCODE, new Iload3Instruction());
+		INSTRUCTIONS.put(IloadInstruction.OPCODE, new IloadInstruction());
 		
 		INSTRUCTIONS.put(IaddInstruction.OPCODE, new IaddInstruction());
 		INSTRUCTIONS.put(IsubInstruction.OPCODE, new IsubInstruction());
 		INSTRUCTIONS.put(ImulInstruction.OPCODE, new ImulInstruction());
 		INSTRUCTIONS.put(IdivInstruction.OPCODE, new IdivInstruction());
+		
+		INSTRUCTIONS.put(Astore0Instruction.OPCODE, new Astore0Instruction());
+		INSTRUCTIONS.put(Astore1Instruction.OPCODE, new Astore1Instruction());
+		INSTRUCTIONS.put(Astore2Instruction.OPCODE, new Astore2Instruction());
+		INSTRUCTIONS.put(Astore3Instruction.OPCODE, new Astore3Instruction());
+		INSTRUCTIONS.put(AstoreInstruction.OPCODE, new AstoreInstruction());
+		
+		INSTRUCTIONS.put(Aload0Instruction.OPCODE, new Aload0Instruction());
+		INSTRUCTIONS.put(Aload1Instruction.OPCODE, new Aload1Instruction());
+		INSTRUCTIONS.put(Aload2Instruction.OPCODE, new Aload2Instruction());
+		INSTRUCTIONS.put(Aload3Instruction.OPCODE, new Aload3Instruction());
+		INSTRUCTIONS.put(AloadInstruction.OPCODE, new AloadInstruction());
 		
 		INSTRUCTIONS.put(ReturnInstruction.OPCODE, new ReturnInstruction());
 		
