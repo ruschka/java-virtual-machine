@@ -19,7 +19,7 @@ public abstract class IArithmeticInstruction extends AbstractInstruction {
 		IntegerObject result = new IntegerObject(getResult(integer2, integer1));
 		heap.addObject(result);
 		frame.push(new Reference(result));
-		return bytecodeIndex;
+		return getBytecodeIndex(bytecodeIndex);
 	}
 	
 	protected abstract Integer getResult(Integer operand1, Integer operand2);

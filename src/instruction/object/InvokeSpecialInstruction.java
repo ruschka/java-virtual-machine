@@ -27,15 +27,15 @@ public class InvokeSpecialInstruction extends InvokeMethodInstruction {
 	@Override
 	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
 		MethodInfo methodInfo = getMethodInfo(frame, bytecode, bytecodeIndex);
+		SignatureInfo signatureInfo = getSignatureInfo(methodInfo.methodSignature);
 		
 		// tridu musime ziskat staticky (tak jak byla urcena pri kompilaci)
 		JavaClass clazz = ClassLoader.loadClass(methodInfo.className);
 		Method method = ClassLoader.getMethodByName(clazz, methodInfo.methodName);
-		int argumentCount = method.getArgumentTypes().length;
 		
 		Frame newFrame = new Frame(frame, clazz.getConstantPool(), method.getCode().getMaxLocals());
 		// argumenty metody
-		for (int i = argumentCount; i > 0; i--) {
+		for (int i = signatureInfo.argumentCount; i > 0; i--) {
 			newFrame.setLocal(i, frame.pop());
 		}
 		// reference na this

@@ -33,8 +33,10 @@ import instruction.object.astore.Astore1Instruction;
 import instruction.object.astore.Astore2Instruction;
 import instruction.object.astore.Astore3Instruction;
 import instruction.object.astore.AstoreInstruction;
+import instruction.returns.IReturnInstruction;
 import instruction.returns.ReturnInstruction;
 import instruction.util.DupInstruction;
+import instruction.util.PopInstruction;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -81,12 +83,14 @@ public class InstructionPool {
 		INSTRUCTIONS.put(AloadInstruction.OPCODE, new AloadInstruction());
 		
 		INSTRUCTIONS.put(ReturnInstruction.OPCODE, new ReturnInstruction());
+		INSTRUCTIONS.put(IReturnInstruction.OPCODE, new IReturnInstruction());
 		
 		INSTRUCTIONS.put(NewInstruction.OPCODE, new NewInstruction());
 		INSTRUCTIONS.put(InvokeSpecialInstruction.OPCODE, new InvokeSpecialInstruction());
 		INSTRUCTIONS.put(InvokeVirtualInstruction.OPCODE, new InvokeVirtualInstruction());
 		
 		INSTRUCTIONS.put(DupInstruction.OPCODE, new DupInstruction());
+		INSTRUCTIONS.put(PopInstruction.OPCODE, new PopInstruction());
 	}
 	
 	public static final AbstractInstruction getInstruction(byte b) {
