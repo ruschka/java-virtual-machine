@@ -1,5 +1,6 @@
 package instruction.object;
 
+import instruction.AbstractInstruction;
 import object.Reference;
 
 import org.apache.bcel.classfile.JavaClass;
@@ -15,7 +16,7 @@ import enviroment.MethodRunner;
  * @author ruschka
  *
  */
-public class InvokeSpecialInstruction extends InvokeMethodInstruction {
+public class InvokeSpecialInstruction extends AbstractInstruction {
 	
 	public static final String OPCODE = "B7";
 
@@ -26,12 +27,12 @@ public class InvokeSpecialInstruction extends InvokeMethodInstruction {
 
 	@Override
 	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
-		MethodInfo methodInfo = getMethodInfo(frame, bytecode, bytecodeIndex);
-		SignatureInfo signatureInfo = getSignatureInfo(methodInfo.methodSignature);
+		FieldOrMethodInfo methodInfo = getMethodInfo(frame, bytecode, bytecodeIndex);
+		MethodSignatureInfo signatureInfo = getMethodSignatureInfo(methodInfo.signature);
 		
 		// tridu musime ziskat staticky (tak jak byla urcena pri kompilaci)
 		JavaClass clazz = ClassLoader.loadClass(methodInfo.className);
-		Method method = ClassLoader.getMethodByName(clazz, methodInfo.methodName);
+		Method method = ClassLoader.getMethodByName(clazz, methodInfo.name);
 		
 		Frame newFrame = new Frame(frame, clazz.getConstantPool(), method.getCode().getMaxLocals());
 		// argumenty metody

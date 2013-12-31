@@ -6,6 +6,12 @@ import instruction.condition.IfIcmpgtInstruction;
 import instruction.condition.IfIcmpleInstruction;
 import instruction.condition.IfIcmpltInstruction;
 import instruction.condition.IfIcmpneInstruction;
+import instruction.condition.IfeqCondition;
+import instruction.condition.IfgeCondition;
+import instruction.condition.IfgtCondition;
+import instruction.condition.IfleCondition;
+import instruction.condition.IfltCondition;
+import instruction.condition.IfneCondition;
 import instruction.integer.iarithmetic.IaddInstruction;
 import instruction.integer.iarithmetic.IdivInstruction;
 import instruction.integer.iarithmetic.ImulInstruction;
@@ -26,9 +32,11 @@ import instruction.integer.istore.Istore1Instruction;
 import instruction.integer.istore.Istore2Instruction;
 import instruction.integer.istore.Istore3Instruction;
 import instruction.integer.istore.IstoreInstruction;
+import instruction.object.GetFieldInstruction;
 import instruction.object.InvokeSpecialInstruction;
 import instruction.object.InvokeVirtualInstruction;
 import instruction.object.NewInstruction;
+import instruction.object.PutFieldInstruction;
 import instruction.object.aload.Aload0Instruction;
 import instruction.object.aload.Aload1Instruction;
 import instruction.object.aload.Aload2Instruction;
@@ -94,6 +102,8 @@ public class InstructionPool {
 		INSTRUCTIONS.put(NewInstruction.OPCODE, new NewInstruction());
 		INSTRUCTIONS.put(InvokeSpecialInstruction.OPCODE, new InvokeSpecialInstruction());
 		INSTRUCTIONS.put(InvokeVirtualInstruction.OPCODE, new InvokeVirtualInstruction());
+		INSTRUCTIONS.put(PutFieldInstruction.OPCODE, new PutFieldInstruction());
+		INSTRUCTIONS.put(GetFieldInstruction.OPCODE, new GetFieldInstruction());
 		
 		INSTRUCTIONS.put(DupInstruction.OPCODE, new DupInstruction());
 		INSTRUCTIONS.put(PopInstruction.OPCODE, new PopInstruction());
@@ -104,6 +114,13 @@ public class InstructionPool {
 		INSTRUCTIONS.put(IfIcmpgtInstruction.OPCODE, new IfIcmpgtInstruction());
 		INSTRUCTIONS.put(IfIcmpeqInstruction.OPCODE, new IfIcmpeqInstruction());
 		INSTRUCTIONS.put(IfIcmpneInstruction.OPCODE, new IfIcmpneInstruction());
+		
+		INSTRUCTIONS.put(IfeqCondition.OPCODE, new IfeqCondition());
+		INSTRUCTIONS.put(IfneCondition.OPCODE, new IfneCondition());
+		INSTRUCTIONS.put(IfleCondition.OPCODE, new IfleCondition());
+		INSTRUCTIONS.put(IfltCondition.OPCODE, new IfltCondition());
+		INSTRUCTIONS.put(IfgeCondition.OPCODE, new IfgeCondition());
+		INSTRUCTIONS.put(IfgtCondition.OPCODE, new IfgtCondition());
 	}
 	
 	public static final AbstractInstruction getInstruction(byte b) {

@@ -1,5 +1,7 @@
 package instruction.object;
 
+import instruction.AbstractInstruction;
+
 import java.util.LinkedList;
 
 import object.JavaObject;
@@ -14,7 +16,7 @@ import enviroment.Heap;
 import enviroment.MethodRunner;
 
 
-public class InvokeVirtualInstruction extends InvokeMethodInstruction {
+public class InvokeVirtualInstruction extends AbstractInstruction {
 	
 	public static final String OPCODE = "B6";
 
@@ -25,8 +27,8 @@ public class InvokeVirtualInstruction extends InvokeMethodInstruction {
 
 	@Override
 	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
-		MethodInfo methodInfo = getMethodInfo(frame, bytecode, bytecodeIndex);
-		SignatureInfo signatureInfo = getSignatureInfo(methodInfo.methodSignature);
+		FieldOrMethodInfo methodInfo = getMethodInfo(frame, bytecode, bytecodeIndex);
+		MethodSignatureInfo signatureInfo = getMethodSignatureInfo(methodInfo.signature);
 		
 		// musime uchovat argumenty
 		LinkedList<Reference> arguments = new LinkedList<Reference>();
@@ -38,7 +40,7 @@ public class InvokeVirtualInstruction extends InvokeMethodInstruction {
 		Reference object = frame.pop();
 		checkObject(object);
 		JavaClass clazz = ((JavaObject)object.getObject()).getJavaClass();
-		Method method = ClassLoader.getMethodByName(clazz, methodInfo.methodName);
+		Method method = ClassLoader.getMethodByName(clazz, methodInfo.name);
 		
 		// pripravime novy frame
 		Frame newFrame = new Frame(frame, clazz.getConstantPool(), method.getCode().getMaxLocals());
