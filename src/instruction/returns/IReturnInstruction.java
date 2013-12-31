@@ -23,7 +23,7 @@ public class IReturnInstruction extends AbstractInstruction {
 	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
 		Reference reference = frame.pop();
 		checkInteger(reference);
-		frame.getParent().push(reference);
+		frame.getParent().push(reference.getObject());
 		return getBytecodeIndex(bytecodeIndex);
 	}
 

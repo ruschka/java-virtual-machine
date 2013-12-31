@@ -17,8 +17,8 @@ public class DupInstruction extends AbstractInstruction {
 	@Override
 	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
 		Reference reference = frame.pop();
-		frame.push(reference);
-		frame.push(reference);
+		frame.push(reference.getObject());
+		frame.push(reference.getObject());
 		return getBytecodeIndex(bytecodeIndex);
 	}
 

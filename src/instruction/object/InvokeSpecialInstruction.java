@@ -27,7 +27,7 @@ public class InvokeSpecialInstruction extends AbstractInstruction {
 
 	@Override
 	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
-		FieldOrMethodInfo methodInfo = getMethodInfo(frame, bytecode, bytecodeIndex);
+		FieldOrMethodInfo methodInfo = getFieldOrMethodInfo(frame, bytecode, bytecodeIndex);
 		MethodSignatureInfo signatureInfo = getMethodSignatureInfo(methodInfo.signature);
 		
 		// tridu musime ziskat staticky (tak jak byla urcena pri kompilaci)
@@ -37,12 +37,12 @@ public class InvokeSpecialInstruction extends AbstractInstruction {
 		Frame newFrame = new Frame(frame, clazz.getConstantPool(), method.getCode().getMaxLocals());
 		// argumenty metody
 		for (int i = signatureInfo.argumentCount; i > 0; i--) {
-			newFrame.setLocal(i, frame.pop());
+			newFrame.setLocal(i, frame.pop().getObject());
 		}
 		// reference na this
-		Reference object = frame.pop();
-		checkObject(object);
-		newFrame.setLocal(Frame.THIS, object);
+		Reference objectReference = frame.pop();
+		checkObject(objectReference);
+		newFrame.setLocal(Frame.THIS, objectReference.getObject());
 		// spusteni metody
 		MethodRunner methodRunner = new MethodRunner(method, newFrame, heap);
 		methodRunner.run();

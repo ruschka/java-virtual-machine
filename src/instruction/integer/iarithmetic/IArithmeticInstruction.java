@@ -18,7 +18,7 @@ public abstract class IArithmeticInstruction extends AbstractInstruction {
 		Integer integer2 = ((IntegerObject)reference2.getObject()).getValue();
 		IntegerObject result = new IntegerObject(getResult(integer2, integer1));
 		heap.addObject(result);
-		frame.push(new Reference(result));
+		frame.push(result);
 		return getBytecodeIndex(bytecodeIndex);
 	}
 	

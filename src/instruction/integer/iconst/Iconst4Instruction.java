@@ -2,7 +2,6 @@ package instruction.integer.iconst;
 
 import instruction.AbstractInstruction;
 import object.IntegerObject;
-import object.Reference;
 import enviroment.Frame;
 import enviroment.Heap;
 
@@ -24,7 +23,7 @@ public class Iconst4Instruction extends AbstractInstruction {
 	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
 		IntegerObject object = new IntegerObject(4);
 		heap.addObject(object);
-		frame.push(new Reference(object));
+		frame.push(object);
 		return getBytecodeIndex(bytecodeIndex);
 	}
 

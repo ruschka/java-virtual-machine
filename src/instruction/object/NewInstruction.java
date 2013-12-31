@@ -1,7 +1,7 @@
 package instruction.object;
 
+import instruction.AbstractInstruction;
 import object.JavaObject;
-import object.Reference;
 
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantClass;
@@ -11,7 +11,6 @@ import org.apache.bcel.classfile.JavaClass;
 import enviroment.ClassLoader;
 import enviroment.Frame;
 import enviroment.Heap;
-import instruction.AbstractInstruction;
 
 public class NewInstruction extends AbstractInstruction {
 	
@@ -32,7 +31,7 @@ public class NewInstruction extends AbstractInstruction {
 		JavaClass loadedClass = ClassLoader.loadClass(className);
 		JavaObject object = new JavaObject(loadedClass);
 		heap.addObject(object);
-		frame.push(new Reference(object));
+		frame.push(object);
 		return getBytecodeIndex(bytecodeIndex);
 	}
 	

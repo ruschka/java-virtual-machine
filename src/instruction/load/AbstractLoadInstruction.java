@@ -11,7 +11,7 @@ public abstract class AbstractLoadInstruction extends AbstractInstruction {
 	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
 		Reference reference = frame.getLocal(getLoadIndex(bytecode, bytecodeIndex));
 		checkType(reference);
-		frame.push(reference);
+		frame.push(reference.getObject());
 		return getBytecodeIndex(bytecodeIndex);
 	}
 	

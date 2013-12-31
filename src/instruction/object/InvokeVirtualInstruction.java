@@ -27,7 +27,7 @@ public class InvokeVirtualInstruction extends AbstractInstruction {
 
 	@Override
 	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
-		FieldOrMethodInfo methodInfo = getMethodInfo(frame, bytecode, bytecodeIndex);
+		FieldOrMethodInfo methodInfo = getFieldOrMethodInfo(frame, bytecode, bytecodeIndex);
 		MethodSignatureInfo signatureInfo = getMethodSignatureInfo(methodInfo.signature);
 		
 		// musime uchovat argumenty
@@ -37,17 +37,17 @@ public class InvokeVirtualInstruction extends AbstractInstruction {
 		}
 		
 		// metodu musime ziskat dynamicky z pushnuteho objektu
-		Reference object = frame.pop();
-		checkObject(object);
-		JavaClass clazz = ((JavaObject)object.getObject()).getJavaClass();
+		Reference objectReference = frame.pop();
+		checkObject(objectReference);
+		JavaClass clazz = ((JavaObject)objectReference.getObject()).getJavaClass();
 		Method method = ClassLoader.getMethodByName(clazz, methodInfo.name);
 		
 		// pripravime novy frame
 		Frame newFrame = new Frame(frame, clazz.getConstantPool(), method.getCode().getMaxLocals());
 		for (int i = signatureInfo.argumentCount; i > 0; i--) {
-			newFrame.setLocal(i, arguments.removeFirst());
+			newFrame.setLocal(i, arguments.removeFirst().getObject());
 		}
-		newFrame.setLocal(Frame.THIS, object);
+		newFrame.setLocal(Frame.THIS, objectReference.getObject());
 		
 		// spusteni metody
 		MethodRunner methodRunner = new MethodRunner(method, newFrame, heap);

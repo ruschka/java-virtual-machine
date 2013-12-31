@@ -11,7 +11,7 @@ public abstract class AbstractStoreInstruction extends AbstractInstruction {
 	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
 		Reference reference = frame.pop();
 		checkType(reference);
-		frame.setLocal(getStoreIndex(bytecode, bytecodeIndex), reference);
+		frame.setLocal(getStoreIndex(bytecode, bytecodeIndex), reference.getObject());
 		return getBytecodeIndex(bytecodeIndex);
 	}
 	

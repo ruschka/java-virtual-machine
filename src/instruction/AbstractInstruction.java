@@ -50,7 +50,7 @@ public abstract class AbstractInstruction {
 		}
 	}
 
-	protected FieldOrMethodInfo getMethodInfo(Frame frame, byte[] bytecode, int bytecodeIndex) {
+	protected FieldOrMethodInfo getFieldOrMethodInfo(Frame frame, byte[] bytecode, int bytecodeIndex) {
 		FieldOrMethodInfo info = new FieldOrMethodInfo();
 		
 		int index = getIntegerFromNextTwoBytes(bytecode, bytecodeIndex);

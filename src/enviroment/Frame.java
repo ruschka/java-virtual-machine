@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantPool;
 
+import object.AbstractObject;
 import object.Reference;
 
 public class Frame {
@@ -30,16 +31,16 @@ public class Frame {
 		return parent;
 	}
 
-	public void push(Reference reference) {
-		stack.addFirst(reference);
+	public void push(AbstractObject<?> object) {
+		stack.addFirst(new Reference(object));
 	}
 	
 	public Reference pop() {
 		return stack.removeFirst();
 	}
 	
-	public void setLocal(int index, Reference reference) {
-		localVariables[index] = reference;
+	public void setLocal(int index, AbstractObject<?> object) {
+		localVariables[index] = new Reference(object);
 	}
 	
 	public Reference getLocal(int index) {
