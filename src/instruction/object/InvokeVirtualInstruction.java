@@ -40,6 +40,7 @@ public class InvokeVirtualInstruction extends InvokeMethodInstruction {
 		JavaClass clazz = ((JavaObject)object.getObject()).getJavaClass();
 		Method method = ClassLoader.getMethodByName(clazz, methodInfo.methodName);
 		
+		// pripravime novy frame
 		Frame newFrame = new Frame(frame, clazz.getConstantPool(), method.getCode().getMaxLocals());
 		for (int i = signatureInfo.argumentCount; i > 0; i--) {
 			newFrame.setLocal(i, arguments.removeFirst());
