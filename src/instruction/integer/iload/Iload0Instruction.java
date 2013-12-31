@@ -1,11 +1,9 @@
 package instruction.integer.iload;
 
-import instruction.AbstractInstruction;
+import instruction.load.Load0Instruction;
 import object.Reference;
-import enviroment.Frame;
-import enviroment.Heap;
 
-public class Iload0Instruction extends AbstractInstruction {
+public class Iload0Instruction extends Load0Instruction {
 	
 	public static final String OPCODE = "1A";
 
@@ -15,11 +13,8 @@ public class Iload0Instruction extends AbstractInstruction {
 	}
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
-		Reference reference = frame.getLocal(0);
+	protected void checkType(Reference reference) {
 		checkInteger(reference);
-		frame.push(reference);
-		return bytecodeIndex;
 	}
 
 }

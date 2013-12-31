@@ -1,12 +1,12 @@
 package instruction.integer.iload;
 
-import instruction.load.Load2Instruction;
 import object.Reference;
+import instruction.load.LoadInstruction;
 
-public class Iload2Instruction extends Load2Instruction {
+public class IloadInstruction extends LoadInstruction {
 	
-	public static final String OPCODE = "1C";
-
+	public static final String OPCODE = "15";
+	
 	@Override
 	public String getOpcode() {
 		return OPCODE;
