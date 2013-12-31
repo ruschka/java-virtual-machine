@@ -23,5 +23,5 @@ public abstract class IfIcmpInstruction extends AbstractConditionInstruction {
 	}
 	
 	protected abstract boolean compareIntegers(Integer integer1, Integer integer2);
-
+	
 }
