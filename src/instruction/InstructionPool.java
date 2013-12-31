@@ -1,6 +1,11 @@
 package instruction;
 
+import instruction.condition.IfIcmpeqInstruction;
+import instruction.condition.IfIcmpgeInstruction;
+import instruction.condition.IfIcmpgtInstruction;
 import instruction.condition.IfIcmpleInstruction;
+import instruction.condition.IfIcmpltInstruction;
+import instruction.condition.IfIcmpneInstruction;
 import instruction.integer.iarithmetic.IaddInstruction;
 import instruction.integer.iarithmetic.IdivInstruction;
 import instruction.integer.iarithmetic.ImulInstruction;
@@ -94,6 +99,11 @@ public class InstructionPool {
 		INSTRUCTIONS.put(PopInstruction.OPCODE, new PopInstruction());
 		
 		INSTRUCTIONS.put(IfIcmpleInstruction.OPCODE, new IfIcmpleInstruction());
+		INSTRUCTIONS.put(IfIcmpltInstruction.OPCODE, new IfIcmpltInstruction());
+		INSTRUCTIONS.put(IfIcmpgeInstruction.OPCODE, new IfIcmpgeInstruction());
+		INSTRUCTIONS.put(IfIcmpgtInstruction.OPCODE, new IfIcmpgtInstruction());
+		INSTRUCTIONS.put(IfIcmpeqInstruction.OPCODE, new IfIcmpeqInstruction());
+		INSTRUCTIONS.put(IfIcmpneInstruction.OPCODE, new IfIcmpneInstruction());
 	}
 	
 	public static final AbstractInstruction getInstruction(byte b) {

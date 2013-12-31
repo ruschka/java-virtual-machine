@@ -1,13 +1,13 @@
 package instruction.condition;
 
 /**
- * if_icmple succeeds if and only if value1 <= value2
+ * if_icmple succeeds if and only if value1 != value2
  * @author ruschka
  *
  */
-public class IfIcmpleInstruction extends IfIcmpInstruction {
+public class IfIcmpneInstruction extends IfIcmpInstruction {
 	
-	public static final String OPCODE = "A4";
+	public static final String OPCODE = "A0";
 	
 	@Override
 	public String getOpcode() {
@@ -16,7 +16,7 @@ public class IfIcmpleInstruction extends IfIcmpInstruction {
 
 	@Override
 	protected boolean compareIntegers(Integer integer1, Integer integer2) {
-		return integer1 <= integer2;
+		return integer1 != integer2;
 	}
 
 }
