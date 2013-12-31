@@ -21,6 +21,7 @@ import instruction.integer.istore.Istore2Instruction;
 import instruction.integer.istore.Istore3Instruction;
 import instruction.integer.istore.IstoreInstruction;
 import instruction.object.InvokeSpecialInstruction;
+import instruction.object.InvokeVirtualInstruction;
 import instruction.object.NewInstruction;
 import instruction.object.aload.Aload0Instruction;
 import instruction.object.aload.Aload1Instruction;
@@ -83,6 +84,7 @@ public class InstructionPool {
 		
 		INSTRUCTIONS.put(NewInstruction.OPCODE, new NewInstruction());
 		INSTRUCTIONS.put(InvokeSpecialInstruction.OPCODE, new InvokeSpecialInstruction());
+		INSTRUCTIONS.put(InvokeVirtualInstruction.OPCODE, new InvokeVirtualInstruction());
 		
 		INSTRUCTIONS.put(DupInstruction.OPCODE, new DupInstruction());
 	}

@@ -1,5 +1,8 @@
 package instruction.object;
 
+import java.util.LinkedList;
+
+import object.JavaObject;
 import object.Reference;
 
 import org.apache.bcel.classfile.JavaClass;
@@ -10,14 +13,10 @@ import enviroment.Frame;
 import enviroment.Heap;
 import enviroment.MethodRunner;
 
-/**
- * Vola se napriklad pri zakladani nove tridy (metoda init).
- * @author ruschka
- *
- */
-public class InvokeSpecialInstruction extends InvokeMethodInstruction {
+
+public class InvokeVirtualInstruction extends InvokeMethodInstruction {
 	
-	public static final String OPCODE = "B7";
+	public static final String OPCODE = "B6";
 
 	@Override
 	public String getOpcode() {
@@ -27,21 +26,26 @@ public class InvokeSpecialInstruction extends InvokeMethodInstruction {
 	@Override
 	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
 		MethodInfo methodInfo = getMethodInfo(frame, bytecode, bytecodeIndex);
+		SignatureInfo signatureInfo = getSignatureInfo(methodInfo.methodSignature);
 		
-		// tridu musime ziskat staticky (tak jak byla urcena pri kompilaci)
-		JavaClass clazz = ClassLoader.loadClass(methodInfo.className);
-		Method method = ClassLoader.getMethodByName(clazz, methodInfo.methodName);
-		int argumentCount = method.getArgumentTypes().length;
-		
-		Frame newFrame = new Frame(frame, clazz.getConstantPool(), method.getCode().getMaxLocals());
-		// argumenty metody
-		for (int i = argumentCount; i > 0; i--) {
-			newFrame.setLocal(i, frame.pop());
+		// musime uchovat argumenty
+		LinkedList<Reference> arguments = new LinkedList<Reference>();
+		for (int i = 0; i < signatureInfo.argumentCount; i++) {
+			arguments.add(frame.pop());
 		}
-		// reference na this
+		
+		// metodu musime ziskat dynamicky z pushnuteho objektu
 		Reference object = frame.pop();
 		checkObject(object);
+		JavaClass clazz = ((JavaObject)object.getObject()).getJavaClass();
+		Method method = ClassLoader.getMethodByName(clazz, methodInfo.methodName);
+		
+		Frame newFrame = new Frame(frame, clazz.getConstantPool(), method.getCode().getMaxLocals());
+		for (int i = signatureInfo.argumentCount; i > 0; i--) {
+			newFrame.setLocal(i, arguments.removeFirst());
+		}
 		newFrame.setLocal(Frame.THIS, object);
+		
 		// spusteni metody
 		MethodRunner methodRunner = new MethodRunner(method, newFrame, heap);
 		methodRunner.run();
