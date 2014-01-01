@@ -1,6 +1,7 @@
 package instruction;
 
 import instruction.array.NewArrayInstruction;
+import instruction.array.load.IArrayLoadInstruction;
 import instruction.array.store.IArrayStoreInstruction;
 import instruction.condition.IfIcmpeqInstruction;
 import instruction.condition.IfIcmpgeInstruction;
@@ -126,6 +127,7 @@ public class InstructionPool {
 		
 		addInstruction(new NewArrayInstruction());
 		addInstruction(new IArrayStoreInstruction());
+		addInstruction(new IArrayLoadInstruction());
 	}
 	
 	public static final AbstractInstruction getInstruction(byte b) {
