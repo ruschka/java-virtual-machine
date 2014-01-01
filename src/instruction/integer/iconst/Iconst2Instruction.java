@@ -1,16 +1,12 @@
 package instruction.integer.iconst;
 
-import instruction.AbstractInstruction;
-import object.IntegerObject;
-import enviroment.Frame;
-import enviroment.Heap;
 
 /**
  * instrukce iconst_2
  * @author ruschka
  *
  */
-public class Iconst2Instruction extends AbstractInstruction {
+public class Iconst2Instruction extends IconstInstruction {
 	
 	public static final String OPCODE = "05";
 
@@ -20,11 +16,8 @@ public class Iconst2Instruction extends AbstractInstruction {
 	}
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
-		IntegerObject object = new IntegerObject(2);
-		heap.addObject(object);
-		frame.push(object);
-		return getBytecodeIndex(bytecodeIndex);
+	protected Integer getValue(byte[] bytecode, int bytecodeIndex) {
+		return 2;
 	}
 
 }

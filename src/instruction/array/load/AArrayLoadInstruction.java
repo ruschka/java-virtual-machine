@@ -2,10 +2,10 @@ package instruction.array.load;
 
 import object.Reference;
 
-public class IArrayLoadInstruction extends AbstractArrayLoadInstruction {
+public class AArrayLoadInstruction extends AbstractArrayLoadInstruction {
 	
-	public static final String OPCODE = "2E";
-
+	public static final String OPCODE = "32";
+	
 	@Override
 	public String getOpcode() {
 		return OPCODE;
@@ -13,7 +13,7 @@ public class IArrayLoadInstruction extends AbstractArrayLoadInstruction {
 
 	@Override
 	protected void checkValue(Reference valueReference) {
-		checkInteger(valueReference);
+		checkJavaObject(valueReference);
 	}
 
 }

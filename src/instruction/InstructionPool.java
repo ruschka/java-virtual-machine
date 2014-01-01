@@ -1,7 +1,10 @@
 package instruction;
 
 import instruction.array.NewArrayInstruction;
+import instruction.array.NewObjectArrayInstruction;
+import instruction.array.load.AArrayLoadInstruction;
 import instruction.array.load.IArrayLoadInstruction;
+import instruction.array.store.AArrayStroreInstruction;
 import instruction.array.store.IArrayStoreInstruction;
 import instruction.condition.IfIcmpeqInstruction;
 import instruction.condition.IfIcmpgeInstruction;
@@ -19,6 +22,7 @@ import instruction.integer.iarithmetic.IaddInstruction;
 import instruction.integer.iarithmetic.IdivInstruction;
 import instruction.integer.iarithmetic.ImulInstruction;
 import instruction.integer.iarithmetic.IsubInstruction;
+import instruction.integer.iconst.BipushInstruction;
 import instruction.integer.iconst.Iconst0Instruction;
 import instruction.integer.iconst.Iconst1Instruction;
 import instruction.integer.iconst.Iconst2Instruction;
@@ -69,6 +73,7 @@ public class InstructionPool {
 		addInstruction(new Iconst3Instruction());
 		addInstruction(new Iconst4Instruction());
 		addInstruction(new Iconst5Instruction());
+		addInstruction(new BipushInstruction());
 		
 		addInstruction(new Istore0Instruction());
 		addInstruction(new Istore1Instruction());
@@ -126,8 +131,11 @@ public class InstructionPool {
 		addInstruction(new IfgtInstruction());
 		
 		addInstruction(new NewArrayInstruction());
+		addInstruction(new NewObjectArrayInstruction());
 		addInstruction(new IArrayStoreInstruction());
+		addInstruction(new AArrayStroreInstruction());
 		addInstruction(new IArrayLoadInstruction());
+		addInstruction(new AArrayLoadInstruction());
 	}
 	
 	public static final AbstractInstruction getInstruction(byte b) {

@@ -7,7 +7,7 @@ import enviroment.Frame;
 import enviroment.Heap;
 import instruction.AbstractInstruction;
 
-public abstract class AbstractArraLoadInstruction extends AbstractInstruction {
+public abstract class AbstractArrayLoadInstruction extends AbstractInstruction {
 
 	@Override
 	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
