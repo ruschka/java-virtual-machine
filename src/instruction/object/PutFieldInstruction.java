@@ -21,7 +21,7 @@ public class PutFieldInstruction extends AbstractInstruction {
 		Reference valueRefence = frame.pop();
 		Reference objectRefence = frame.pop();
 		
-		checkObject(objectRefence);
+		checkJavaObject(objectRefence);
 		// TODO dodelat kontrolu typu
 		
 		JavaObject object = (JavaObject) objectRefence.getObject();

@@ -41,7 +41,7 @@ public class InvokeSpecialInstruction extends AbstractInstruction {
 		}
 		// reference na this
 		Reference objectReference = frame.pop();
-		checkObject(objectReference);
+		checkJavaObject(objectReference);
 		newFrame.setLocal(Frame.THIS, objectReference.getObject());
 		// spusteni metody
 		MethodRunner methodRunner = new MethodRunner(method, newFrame, heap);

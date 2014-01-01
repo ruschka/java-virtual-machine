@@ -31,7 +31,7 @@ public class Frame {
 		return parent;
 	}
 
-	public void push(AbstractObject<?> object) {
+	public void push(AbstractObject object) {
 		stack.addFirst(new Reference(object));
 	}
 	
@@ -39,7 +39,7 @@ public class Frame {
 		return stack.removeFirst();
 	}
 	
-	public void setLocal(int index, AbstractObject<?> object) {
+	public void setLocal(int index, AbstractObject object) {
 		localVariables[index] = new Reference(object);
 	}
 	

@@ -14,7 +14,7 @@ public class Aload3Instruction extends Load3Instruction {
 
 	@Override
 	protected void checkType(Reference reference) {
-		checkObject(reference);
+		checkComplexObject(reference);
 	}
 
 }

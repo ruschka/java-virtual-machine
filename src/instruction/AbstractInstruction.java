@@ -1,5 +1,7 @@
 package instruction;
 
+import object.ArrayObject;
+import object.ComplexObject;
 import object.IntegerObject;
 import object.JavaObject;
 import object.Reference;
@@ -44,9 +46,21 @@ public abstract class AbstractInstruction {
 		}
 	}
 	
-	protected void checkObject(Reference reference) {
+	protected void checkComplexObject(Reference reference) {
+		if (!(reference.getObject() instanceof ComplexObject)) {
+			throw new IllegalStateException("Object has to be complex object.");
+		}
+	}
+	
+	protected void checkJavaObject(Reference reference) {
 		if (!(reference.getObject() instanceof JavaObject)) {
 			throw new IllegalStateException("Object has to be java object.");
+		}
+	}
+	
+	protected void checkArrayObject(Reference reference) {
+		if (!(reference.getObject() instanceof ArrayObject)) {
+			throw new IllegalStateException("Object has to be array object.");
 		}
 	}
 

@@ -1,17 +1,19 @@
 package instruction;
 
+import instruction.array.NewArrayInstruction;
+import instruction.array.store.IArrayStoreInstruction;
 import instruction.condition.IfIcmpeqInstruction;
 import instruction.condition.IfIcmpgeInstruction;
 import instruction.condition.IfIcmpgtInstruction;
 import instruction.condition.IfIcmpleInstruction;
 import instruction.condition.IfIcmpltInstruction;
 import instruction.condition.IfIcmpneInstruction;
-import instruction.condition.IfeqCondition;
-import instruction.condition.IfgeCondition;
-import instruction.condition.IfgtCondition;
-import instruction.condition.IfleCondition;
-import instruction.condition.IfltCondition;
-import instruction.condition.IfneCondition;
+import instruction.condition.IfeqInstruction;
+import instruction.condition.IfgeInstruction;
+import instruction.condition.IfgtInstruction;
+import instruction.condition.IfleInstruction;
+import instruction.condition.IfltInstruction;
+import instruction.condition.IfneInstruction;
 import instruction.integer.iarithmetic.IaddInstruction;
 import instruction.integer.iarithmetic.IdivInstruction;
 import instruction.integer.iarithmetic.ImulInstruction;
@@ -60,67 +62,70 @@ public class InstructionPool {
 	private static final Map<String, AbstractInstruction> INSTRUCTIONS = new HashMap<String, AbstractInstruction>();
 	
 	static {
-		INSTRUCTIONS.put(Iconst0Instruction.OPCODE, new Iconst0Instruction());
-		INSTRUCTIONS.put(Iconst1Instruction.OPCODE, new Iconst1Instruction());
-		INSTRUCTIONS.put(Iconst2Instruction.OPCODE, new Iconst2Instruction());
-		INSTRUCTIONS.put(Iconst3Instruction.OPCODE, new Iconst3Instruction());
-		INSTRUCTIONS.put(Iconst4Instruction.OPCODE, new Iconst4Instruction());
-		INSTRUCTIONS.put(Iconst5Instruction.OPCODE, new Iconst5Instruction());
+		addInstruction(new Iconst0Instruction());
+		addInstruction(new Iconst1Instruction());
+		addInstruction(new Iconst2Instruction());
+		addInstruction(new Iconst3Instruction());
+		addInstruction(new Iconst4Instruction());
+		addInstruction(new Iconst5Instruction());
 		
-		INSTRUCTIONS.put(Istore0Instruction.OPCODE, new Istore0Instruction());
-		INSTRUCTIONS.put(Istore1Instruction.OPCODE, new Istore1Instruction());
-		INSTRUCTIONS.put(Istore2Instruction.OPCODE, new Istore2Instruction());
-		INSTRUCTIONS.put(Istore3Instruction.OPCODE, new Istore3Instruction());
-		INSTRUCTIONS.put(IstoreInstruction.OPCODE, new IstoreInstruction());
+		addInstruction(new Istore0Instruction());
+		addInstruction(new Istore1Instruction());
+		addInstruction(new Istore2Instruction());
+		addInstruction(new Istore3Instruction());
+		addInstruction(new IstoreInstruction());
 		
-		INSTRUCTIONS.put(Iload0Instruction.OPCODE, new Iload0Instruction());
-		INSTRUCTIONS.put(Iload1Instruction.OPCODE, new Iload1Instruction());
-		INSTRUCTIONS.put(Iload2Instruction.OPCODE, new Iload2Instruction());
-		INSTRUCTIONS.put(Iload3Instruction.OPCODE, new Iload3Instruction());
-		INSTRUCTIONS.put(IloadInstruction.OPCODE, new IloadInstruction());
+		addInstruction(new Iload0Instruction());
+		addInstruction(new Iload1Instruction());
+		addInstruction(new Iload2Instruction());
+		addInstruction(new Iload3Instruction());
+		addInstruction(new IloadInstruction());
 		
-		INSTRUCTIONS.put(IaddInstruction.OPCODE, new IaddInstruction());
-		INSTRUCTIONS.put(IsubInstruction.OPCODE, new IsubInstruction());
-		INSTRUCTIONS.put(ImulInstruction.OPCODE, new ImulInstruction());
-		INSTRUCTIONS.put(IdivInstruction.OPCODE, new IdivInstruction());
+		addInstruction(new IaddInstruction());
+		addInstruction(new IsubInstruction());
+		addInstruction(new ImulInstruction());
+		addInstruction(new IdivInstruction());
 		
-		INSTRUCTIONS.put(Astore0Instruction.OPCODE, new Astore0Instruction());
-		INSTRUCTIONS.put(Astore1Instruction.OPCODE, new Astore1Instruction());
-		INSTRUCTIONS.put(Astore2Instruction.OPCODE, new Astore2Instruction());
-		INSTRUCTIONS.put(Astore3Instruction.OPCODE, new Astore3Instruction());
-		INSTRUCTIONS.put(AstoreInstruction.OPCODE, new AstoreInstruction());
+		addInstruction(new Astore0Instruction());
+		addInstruction(new Astore1Instruction());
+		addInstruction(new Astore2Instruction());
+		addInstruction(new Astore3Instruction());
+		addInstruction(new AstoreInstruction());
 		
-		INSTRUCTIONS.put(Aload0Instruction.OPCODE, new Aload0Instruction());
-		INSTRUCTIONS.put(Aload1Instruction.OPCODE, new Aload1Instruction());
-		INSTRUCTIONS.put(Aload2Instruction.OPCODE, new Aload2Instruction());
-		INSTRUCTIONS.put(Aload3Instruction.OPCODE, new Aload3Instruction());
-		INSTRUCTIONS.put(AloadInstruction.OPCODE, new AloadInstruction());
+		addInstruction(new Aload0Instruction());
+		addInstruction(new Aload1Instruction());
+		addInstruction(new Aload2Instruction());
+		addInstruction(new Aload3Instruction());
+		addInstruction(new AloadInstruction());
 		
-		INSTRUCTIONS.put(ReturnInstruction.OPCODE, new ReturnInstruction());
-		INSTRUCTIONS.put(IReturnInstruction.OPCODE, new IReturnInstruction());
+		addInstruction(new ReturnInstruction());
+		addInstruction(new IReturnInstruction());
 		
-		INSTRUCTIONS.put(NewInstruction.OPCODE, new NewInstruction());
-		INSTRUCTIONS.put(InvokeSpecialInstruction.OPCODE, new InvokeSpecialInstruction());
-		INSTRUCTIONS.put(InvokeVirtualInstruction.OPCODE, new InvokeVirtualInstruction());
-		INSTRUCTIONS.put(PutFieldInstruction.OPCODE, new PutFieldInstruction());
-		INSTRUCTIONS.put(GetFieldInstruction.OPCODE, new GetFieldInstruction());
+		addInstruction(new NewInstruction());
+		addInstruction(new InvokeSpecialInstruction());
+		addInstruction(new InvokeVirtualInstruction());
+		addInstruction(new PutFieldInstruction());
+		addInstruction(new GetFieldInstruction());
 		
-		INSTRUCTIONS.put(DupInstruction.OPCODE, new DupInstruction());
-		INSTRUCTIONS.put(PopInstruction.OPCODE, new PopInstruction());
+		addInstruction(new DupInstruction());
+		addInstruction(new PopInstruction());
 		
-		INSTRUCTIONS.put(IfIcmpleInstruction.OPCODE, new IfIcmpleInstruction());
-		INSTRUCTIONS.put(IfIcmpltInstruction.OPCODE, new IfIcmpltInstruction());
-		INSTRUCTIONS.put(IfIcmpgeInstruction.OPCODE, new IfIcmpgeInstruction());
-		INSTRUCTIONS.put(IfIcmpgtInstruction.OPCODE, new IfIcmpgtInstruction());
-		INSTRUCTIONS.put(IfIcmpeqInstruction.OPCODE, new IfIcmpeqInstruction());
-		INSTRUCTIONS.put(IfIcmpneInstruction.OPCODE, new IfIcmpneInstruction());
+		addInstruction(new IfIcmpleInstruction());
+		addInstruction(new IfIcmpltInstruction());
+		addInstruction(new IfIcmpgeInstruction());
+		addInstruction(new IfIcmpgtInstruction());
+		addInstruction(new IfIcmpeqInstruction());
+		addInstruction(new IfIcmpneInstruction());
 		
-		INSTRUCTIONS.put(IfeqCondition.OPCODE, new IfeqCondition());
-		INSTRUCTIONS.put(IfneCondition.OPCODE, new IfneCondition());
-		INSTRUCTIONS.put(IfleCondition.OPCODE, new IfleCondition());
-		INSTRUCTIONS.put(IfltCondition.OPCODE, new IfltCondition());
-		INSTRUCTIONS.put(IfgeCondition.OPCODE, new IfgeCondition());
-		INSTRUCTIONS.put(IfgtCondition.OPCODE, new IfgtCondition());
+		addInstruction(new IfeqInstruction());
+		addInstruction(new IfneInstruction());
+		addInstruction(new IfleInstruction());
+		addInstruction(new IfltInstruction());
+		addInstruction(new IfgeInstruction());
+		addInstruction(new IfgtInstruction());
+		
+		addInstruction(new NewArrayInstruction());
+		addInstruction(new IArrayStoreInstruction());
 	}
 	
 	public static final AbstractInstruction getInstruction(byte b) {
@@ -130,6 +135,10 @@ public class InstructionPool {
 			throw new IllegalStateException("Instruction " + key + " not found.");
 		}
 		return instruction;
+	}
+	
+	private static void addInstruction(AbstractInstruction instruction) {
+		INSTRUCTIONS.put(instruction.getOpcode(), instruction);
 	}
 
 }

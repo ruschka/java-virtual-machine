@@ -1,6 +1,6 @@
 package object;
 
-public class IntegerObject extends AbstractObject<Integer> {
+public class IntegerObject extends PrimitiveObject<Integer> {
 	
 	private Integer value;
 

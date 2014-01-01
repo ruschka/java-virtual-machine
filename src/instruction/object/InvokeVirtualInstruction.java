@@ -38,7 +38,7 @@ public class InvokeVirtualInstruction extends AbstractInstruction {
 		
 		// metodu musime ziskat dynamicky z pushnuteho objektu
 		Reference objectReference = frame.pop();
-		checkObject(objectReference);
+		checkJavaObject(objectReference);
 		JavaClass clazz = ((JavaObject)objectReference.getObject()).getJavaClass();
 		Method method = ClassLoader.getMethodByName(clazz, methodInfo.name);
 		

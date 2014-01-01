@@ -1,13 +1,13 @@
 package instruction.condition;
 
 /**
- * ifle succeeds if and only if value <= 0
+ * iflt succeeds if and only if value < 0
  * @author ruschka
  *
  */
-public class IfleCondition extends IfInstruction {
+public class IfltInstruction extends IfInstruction {
 	
-	public static final String OPCODE = "9E";
+	public static final String OPCODE = "9B";
 
 	@Override
 	public String getOpcode() {
@@ -16,7 +16,7 @@ public class IfleCondition extends IfInstruction {
 
 	@Override
 	protected boolean compare(Integer integer) {
-		return integer <= 0;
+		return integer < 0;
 	}
 
 }

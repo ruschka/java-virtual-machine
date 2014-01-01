@@ -14,7 +14,7 @@ public class AstoreInstruction extends StoreInstruction {
 	
 	@Override
 	protected void checkType(Reference reference) {
-		checkObject(reference);
+		checkComplexObject(reference);
 	}
 
 }

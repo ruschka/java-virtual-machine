@@ -1,13 +1,13 @@
 package instruction.condition;
 
 /**
- * ifge succeeds if and only if value >= 0
+ * ifne succeeds if and only if value != 0
  * @author ruschka
  *
  */
-public class IfgeCondition extends IfInstruction {
+public class IfneInstruction extends IfInstruction {
 	
-	public static final String OPCODE = "9C";
+	public static final String OPCODE = "9A";
 
 	@Override
 	public String getOpcode() {
@@ -16,7 +16,7 @@ public class IfgeCondition extends IfInstruction {
 
 	@Override
 	protected boolean compare(Integer integer) {
-		return integer >= 0;
+		return integer != 0;
 	}
 
 }

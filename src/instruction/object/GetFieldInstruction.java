@@ -20,8 +20,7 @@ public class GetFieldInstruction extends AbstractInstruction {
 		FieldOrMethodInfo fieldInfo = getFieldOrMethodInfo(frame, bytecode, bytecodeIndex);
 		Reference objectReference = frame.pop();
 		
-		checkObject(objectReference);
-		// TODO dodelat kontrolu typu
+		checkJavaObject(objectReference);
 		
 		JavaObject object = (JavaObject) objectReference.getObject();
 		Reference valueReference = object.getField(fieldInfo.name);

@@ -7,9 +7,9 @@ import object.AbstractObject;
 
 public class Heap {
 	
-	private List<AbstractObject<?>> objects = new ArrayList<AbstractObject<?>>();
+	private List<AbstractObject> objects = new ArrayList<AbstractObject>();
 	
-	public void addObject(AbstractObject<?> object) {
+	public void addObject(AbstractObject object) {
 		objects.add(object);
 	}
 	

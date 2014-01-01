@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.bcel.classfile.JavaClass;
 
-public class JavaObject extends AbstractObject<Object> {
+public class JavaObject extends ComplexObject {
 	
 	private JavaClass javaClass;
 	
@@ -15,17 +15,12 @@ public class JavaObject extends AbstractObject<Object> {
 		super();
 		this.javaClass = javaClass;
 	}
-
-	@Override
-	public Object getValue() {
-		throw new UnsupportedOperationException("Object cannot return value");
-	}
 	
 	public JavaClass getJavaClass() {
 		return javaClass;
 	}
 	
-	public void putField(String field, AbstractObject<?> object) {
+	public void putField(String field, AbstractObject object) {
 		fields.put(field, new Reference(object));
 	}
 	
