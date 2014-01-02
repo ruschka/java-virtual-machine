@@ -37,7 +37,7 @@ public abstract class AbstractInstruction {
 	}
 	
 	protected int getIntegerFromNextTwoBytes(byte[] bytecode, int bytecodeIndex) {
-		return (((int)bytecode[bytecodeIndex + 1]) << 8) + bytecode[bytecodeIndex + 2];
+		return (((int)bytecode[bytecodeIndex + 1]) << 8) | bytecode[bytecodeIndex + 2];
 	}
 	
 	protected void checkInteger(Reference reference) {

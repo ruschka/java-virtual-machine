@@ -22,6 +22,7 @@ public class NewArrayInstruction extends AbstractInstruction {
 		Reference lenghtReference = frame.pop();
 		Integer lenght = ((IntegerObject)lenghtReference.getObject()).getValue();
 		ArrayObject array = new ArrayObject(lenght);
+		heap.addObject(array);
 		frame.push(array);
 		return getBytecodeIndex(bytecodeIndex);
 	}

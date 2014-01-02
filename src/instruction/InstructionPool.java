@@ -57,6 +57,8 @@ import instruction.object.astore.AstoreInstruction;
 import instruction.returns.IReturnInstruction;
 import instruction.returns.ReturnInstruction;
 import instruction.util.DupInstruction;
+import instruction.util.GotoInstruction;
+import instruction.util.IincInstruction;
 import instruction.util.PopInstruction;
 
 import java.util.HashMap;
@@ -115,6 +117,8 @@ public class InstructionPool {
 		
 		addInstruction(new DupInstruction());
 		addInstruction(new PopInstruction());
+		addInstruction(new IincInstruction());
+		addInstruction(new GotoInstruction());
 		
 		addInstruction(new IfIcmpleInstruction());
 		addInstruction(new IfIcmpltInstruction());
