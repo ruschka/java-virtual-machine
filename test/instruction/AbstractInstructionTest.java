@@ -79,5 +79,12 @@ public class AbstractInstructionTest {
 		MethodSignatureInfo info = instruction.getMethodSignatureInfo(signature);
 		assertEquals(2, info.argumentCount);
 	}
+	
+	@Test
+	public void getMethodSignatureInfoTest10() {
+		String signature = "(Ljava/lang/String;I[ILjava/lang/String;)V";
+		MethodSignatureInfo info = instruction.getMethodSignatureInfo(signature);
+		assertEquals(4, info.argumentCount);
+	}
 
 }

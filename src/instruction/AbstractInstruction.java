@@ -133,6 +133,11 @@ public abstract class AbstractInstruction {
 		return info;
 	}
 	
+	/**
+	 * http://stackoverflow.com/a/9909370/2913412
+	 * @param arguments Retezec definujici argumenty
+	 * @return pocet argumentu
+	 */
 	private int getArgumentCount(String arguments) {
 		int argumentCount = 0;
 		int index = 0;
@@ -143,10 +148,10 @@ public abstract class AbstractInstruction {
 				increment = false;
 			}
 			if (ch == 'L') { // trida
-				index = arguments.indexOf(';', index);
+				index = arguments.indexOf(';', index); // posuneme se na konec nazvu tridy
 			}
-			++index;
-			if (increment) {
+			++index; // index posuneme
+			if (increment) {  // pokud na aktualnim indexu nebylo pole, zvysime pocet argumentu
 				++argumentCount;
 			}
 			increment = true;
