@@ -28,14 +28,35 @@ public abstract class AbstractInstruction {
 	 */
 	public abstract int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex);
 	
+	/**
+	 * Default posunuti indexu ukazujiciho na aktualni pozici v bytecodu.
+	 * Kazda instrukce ho muze posunuti predefinovat (a take se to casto deje).
+	 * 
+	 * Spravnou definici teto metody je instrukce zodpovedna za to,
+	 * aby po jejim vykonani byl bytecodeIndex nastaveny na dalsi instrukci.
+	 * @param bytecodeIndex Index, na kterem lezi aktualni instrukce.
+	 * @return Index, na kterem lezi dalsi instrukce.
+	 */
 	protected int getBytecodeIndex(int bytecodeIndex) {
 		return bytecodeIndex + 1;
 	}
 	
+	/**
+	 * Z nasledujiciho bytu (oproti bytecodeIndexu) v bytecodu vyrobi int.
+	 * @param bytecode
+	 * @param bytecodeIndex
+	 * @return
+	 */
 	protected int getIntegerFormNextByte(byte[] bytecode, int bytecodeIndex) {
 		return (int)bytecode[bytecodeIndex + 1];
 	}
 	
+	/**
+	 * Z nasledujiciho dvou bytu (oproti bytecodeIndexu) v bytecodu vyrobi int.
+	 * @param bytecode
+	 * @param bytecodeIndex
+	 * @return
+	 */
 	protected int getIntegerFromNextTwoBytes(byte[] bytecode, int bytecodeIndex) {
 		return (((int)bytecode[bytecodeIndex + 1]) << 8) | bytecode[bytecodeIndex + 2];
 	}
