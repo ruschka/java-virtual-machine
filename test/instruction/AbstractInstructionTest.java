@@ -51,5 +51,33 @@ public class AbstractInstructionTest {
 		MethodSignatureInfo info = instruction.getMethodSignatureInfo(signature);
 		assertEquals(1, info.argumentCount);
 	}
+	
+	@Test
+	public void getMethodSignatureInfoTest6() {
+		String signature = "([[I)V";
+		MethodSignatureInfo info = instruction.getMethodSignatureInfo(signature);
+		assertEquals(1, info.argumentCount);
+	}
+	
+	@Test
+	public void getMethodSignatureInfoTest7() {
+		String signature = "([[I[I)V";
+		MethodSignatureInfo info = instruction.getMethodSignatureInfo(signature);
+		assertEquals(2, info.argumentCount);
+	}
+	
+	@Test
+	public void getMethodSignatureInfoTest8() {
+		String signature = "([[ILjava/lang/String;)V";
+		MethodSignatureInfo info = instruction.getMethodSignatureInfo(signature);
+		assertEquals(2, info.argumentCount);
+	}
+	
+	@Test
+	public void getMethodSignatureInfoTest9() {
+		String signature = "(Ljava/lang/String;Ljava/lang/String;)V";
+		MethodSignatureInfo info = instruction.getMethodSignatureInfo(signature);
+		assertEquals(2, info.argumentCount);
+	}
 
 }

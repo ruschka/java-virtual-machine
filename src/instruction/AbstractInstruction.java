@@ -120,16 +120,38 @@ public abstract class AbstractInstruction {
 	protected MethodSignatureInfo getMethodSignatureInfo(String signature) {
 		MethodSignatureInfo info = new MethodSignatureInfo();
 		// TODO predelat lepe. zatim umi jen zakladni typy
-		int argumentsStart = signature.indexOf('(');
-		if (argumentsStart != 0) {
-			throw new IllegalStateException("ArgumentsStart has to be 0");
+		int argumentStart = signature.indexOf('(');
+		if (argumentStart != 0) {
+			throw new IllegalStateException("ArgumentStart has to be 0");
 		}
-		int argumentsEnd = signature.indexOf(')');
-		if (argumentsEnd < 1) {
-			throw new IllegalStateException("ArgumentsStart has to be higher than 0");
+		int argumentEnd = signature.indexOf(')');
+		if (argumentEnd < 1) {
+			throw new IllegalStateException("ArgumentStart has to be higher than 0");
 		}
-		info.argumentCount = argumentsEnd - argumentsStart - 1;
+		String arguments = signature.substring(argumentStart + 1, argumentEnd);
+		info.argumentCount = getArgumentCount(arguments);
 		return info;
+	}
+	
+	private int getArgumentCount(String arguments) {
+		int argumentCount = 0;
+		int index = 0;
+		boolean increment = true;
+		while (index < arguments.length()) {
+			char ch = arguments.charAt(index);
+			if (ch == '[') { // pole
+				increment = false;
+			}
+			if (ch == 'L') { // trida
+				index = arguments.indexOf(';', index);
+			}
+			++index;
+			if (increment) {
+				++argumentCount;
+			}
+			increment = true;
+		}
+		return argumentCount;
 	}
 	
 	protected class FieldOrMethodInfo {
