@@ -1,5 +1,6 @@
 package instruction;
 
+import instruction.array.ArrayLenghtInstruction;
 import instruction.array.NewArrayInstruction;
 import instruction.array.NewObjectArrayInstruction;
 import instruction.array.load.AArrayLoadInstruction;
@@ -29,6 +30,7 @@ import instruction.integer.iconst.Iconst2Instruction;
 import instruction.integer.iconst.Iconst3Instruction;
 import instruction.integer.iconst.Iconst4Instruction;
 import instruction.integer.iconst.Iconst5Instruction;
+import instruction.integer.iconst.Iconstm1Instruction;
 import instruction.integer.iload.Iload0Instruction;
 import instruction.integer.iload.Iload1Instruction;
 import instruction.integer.iload.Iload2Instruction;
@@ -69,6 +71,7 @@ public class InstructionPool {
 	private static final Map<String, AbstractInstruction> INSTRUCTIONS = new HashMap<String, AbstractInstruction>();
 	
 	static {
+		addInstruction(new Iconstm1Instruction());
 		addInstruction(new Iconst0Instruction());
 		addInstruction(new Iconst1Instruction());
 		addInstruction(new Iconst2Instruction());
@@ -140,6 +143,7 @@ public class InstructionPool {
 		addInstruction(new AArrayStroreInstruction());
 		addInstruction(new IArrayLoadInstruction());
 		addInstruction(new AArrayLoadInstruction());
+		addInstruction(new ArrayLenghtInstruction());
 	}
 	
 	public static final AbstractInstruction getInstruction(byte b) {

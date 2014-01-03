@@ -18,8 +18,12 @@ public class ArrayObject extends ComplexObject {
 		return array[index];
 	}
 	
+	public int getLength() {
+		return array.length;
+	}
+	
 	private void checkIndex(int index) {
-		if (index < 0 || index >= array.length) {
+		if (index < 0 || index >= getLength()) {
 			throw new IllegalStateException("Index has to be equal or higher than 0 and lower then array lenght.");
 		}
 	}
