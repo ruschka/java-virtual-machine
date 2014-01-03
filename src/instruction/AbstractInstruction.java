@@ -30,7 +30,7 @@ public abstract class AbstractInstruction {
 	
 	/**
 	 * Default posunuti indexu ukazujiciho na aktualni pozici v bytecodu.
-	 * Kazda instrukce ho muze posunuti predefinovat (a take se to casto deje).
+	 * Kazda instrukce muze posunuti predefinovat (a take se to casto deje).
 	 * 
 	 * Spravnou definici teto metody je instrukce zodpovedna za to,
 	 * aby po jejim vykonani byl bytecodeIndex nastaveny na dalsi instrukci.
