@@ -11,6 +11,7 @@ import org.apache.bcel.classfile.Method;
 public class Controller {
 	
 	private static final String MAIN_METHOD_NAME = "main";
+	private static final String MAIN_METHOD_SIGNATURE = "([Ljava/lang/String;)V";
 	
 	/**
 	 * Main class programu. VM se na ni pokusi najit metodu main() a tu spustit.
@@ -25,7 +26,7 @@ public class Controller {
 
 	public void run() {
 		mainClass = ClassLoader.loadClass(mainClassName);
-		Method mainMethod = ClassLoader.getMethodByName(mainClass, MAIN_METHOD_NAME);
+		Method mainMethod = ClassLoader.getMethodByName(mainClass, MAIN_METHOD_NAME, MAIN_METHOD_SIGNATURE);
 		Frame frame = new Frame(null, mainClass.getConstantPool(), mainMethod.getCode().getMaxLocals());
 		Heap heap = new Heap();
 		MethodRunner methodRunner = new MethodRunner(mainMethod, frame, heap);

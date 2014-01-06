@@ -28,6 +28,7 @@ public class NewInstruction extends AbstractInstruction {
 		int nameIndex = ((ConstantClass)constant).getNameIndex();
 		Constant nameConstant = frame.getConstant(nameIndex);
 		String className = ((ConstantUtf8)nameConstant).getBytes();
+		// TODO tady rozhodovat, zda tridu simulovat nebo opravdu vytvorit objekt
 		JavaClass loadedClass = ClassLoader.loadClass(className);
 		JavaObject object = new JavaObject(loadedClass);
 		heap.addObject(object);

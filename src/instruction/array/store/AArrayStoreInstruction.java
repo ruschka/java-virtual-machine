@@ -2,7 +2,7 @@ package instruction.array.store;
 
 import object.Reference;
 
-public class AArrayStroreInstruction extends AbstractArrayStoreInstruction {
+public class AArrayStoreInstruction extends AbstractArrayStoreInstruction {
 	
 	public static final String OPCODE = "53";
 	

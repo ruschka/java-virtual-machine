@@ -14,10 +14,10 @@ public class ClassLoader {
 		}
 	}
 	
-	public static Method getMethodByName(JavaClass clazz, String methodName) {
+	public static Method getMethodByName(JavaClass clazz, String methodName, String methodSignature) {
 		Method[] methods = clazz.getMethods();
 		for (Method method : methods) {
-			if (methodName.equals(method.getName())) {
+			if (methodName.equals(method.getName()) && methodSignature.equals(method.getSignature())) {
 				return method;
 			}
 		}

@@ -40,7 +40,7 @@ public class InvokeVirtualInstruction extends AbstractInstruction {
 		Reference objectReference = frame.pop();
 		checkJavaObject(objectReference);
 		JavaClass clazz = ((JavaObject)objectReference.getObject()).getJavaClass();
-		Method method = ClassLoader.getMethodByName(clazz, methodInfo.name);
+		Method method = ClassLoader.getMethodByName(clazz, methodInfo.name, methodInfo.signature);
 		
 		// pripravime novy frame
 		Frame newFrame = new Frame(frame, clazz.getConstantPool(), method.getCode().getMaxLocals());

@@ -5,7 +5,8 @@ import instruction.array.NewArrayInstruction;
 import instruction.array.NewObjectArrayInstruction;
 import instruction.array.load.AArrayLoadInstruction;
 import instruction.array.load.IArrayLoadInstruction;
-import instruction.array.store.AArrayStroreInstruction;
+import instruction.array.store.AArrayStoreInstruction;
+import instruction.array.store.BArrayStoreInstruction;
 import instruction.array.store.IArrayStoreInstruction;
 import instruction.condition.IfIcmpeqInstruction;
 import instruction.condition.IfIcmpgeInstruction;
@@ -61,6 +62,7 @@ import instruction.returns.ReturnInstruction;
 import instruction.util.DupInstruction;
 import instruction.util.GotoInstruction;
 import instruction.util.IincInstruction;
+import instruction.util.LdcInstruction;
 import instruction.util.PopInstruction;
 
 import java.util.HashMap;
@@ -122,6 +124,7 @@ public class InstructionPool {
 		addInstruction(new PopInstruction());
 		addInstruction(new IincInstruction());
 		addInstruction(new GotoInstruction());
+		addInstruction(new LdcInstruction());
 		
 		addInstruction(new IfIcmpleInstruction());
 		addInstruction(new IfIcmpltInstruction());
@@ -140,7 +143,8 @@ public class InstructionPool {
 		addInstruction(new NewArrayInstruction());
 		addInstruction(new NewObjectArrayInstruction());
 		addInstruction(new IArrayStoreInstruction());
-		addInstruction(new AArrayStroreInstruction());
+		addInstruction(new AArrayStoreInstruction());
+		addInstruction(new BArrayStoreInstruction());
 		addInstruction(new IArrayLoadInstruction());
 		addInstruction(new AArrayLoadInstruction());
 		addInstruction(new ArrayLenghtInstruction());

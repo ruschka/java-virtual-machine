@@ -48,7 +48,7 @@ public abstract class AbstractInstruction {
 	 * @return
 	 */
 	protected int getIntegerFormNextByte(byte[] bytecode, int bytecodeIndex) {
-		return (int)bytecode[bytecodeIndex + 1];
+		return ((int)bytecode[bytecodeIndex + 1]) & 0xFF;
 	}
 	
 	/**
@@ -58,7 +58,9 @@ public abstract class AbstractInstruction {
 	 * @return
 	 */
 	protected int getIntegerFromNextTwoBytes(byte[] bytecode, int bytecodeIndex) {
-		return (((int)bytecode[bytecodeIndex + 1]) << 8) | bytecode[bytecodeIndex + 2];
+		int b1 = (((int)bytecode[bytecodeIndex + 1]) & 0xFF) << 8;
+		int b2 = ((int)bytecode[bytecodeIndex + 2]) & 0xFF;
+		return b1 | b2;
 	}
 	
 	protected void checkInteger(Reference reference) {
@@ -119,7 +121,6 @@ public abstract class AbstractInstruction {
 
 	protected MethodSignatureInfo getMethodSignatureInfo(String signature) {
 		MethodSignatureInfo info = new MethodSignatureInfo();
-		// TODO predelat lepe. zatim umi jen zakladni typy
 		int argumentStart = signature.indexOf('(');
 		if (argumentStart != 0) {
 			throw new IllegalStateException("ArgumentStart has to be 0");

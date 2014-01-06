@@ -32,7 +32,7 @@ public class InvokeSpecialInstruction extends AbstractInstruction {
 		
 		// tridu musime ziskat staticky (tak jak byla urcena pri kompilaci)
 		JavaClass clazz = ClassLoader.loadClass(methodInfo.className);
-		Method method = ClassLoader.getMethodByName(clazz, methodInfo.name);
+		Method method = ClassLoader.getMethodByName(clazz, methodInfo.name, methodInfo.signature);
 		
 		Frame newFrame = new Frame(frame, clazz.getConstantPool(), method.getCode().getMaxLocals());
 		// argumenty metody

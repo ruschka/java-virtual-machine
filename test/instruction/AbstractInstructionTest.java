@@ -86,5 +86,10 @@ public class AbstractInstructionTest {
 		MethodSignatureInfo info = instruction.getMethodSignatureInfo(signature);
 		assertEquals(4, info.argumentCount);
 	}
+	
+	@Test
+	public void getIntegerFromNextTwoBytesTest1() {
+		
+	}
 
 }
