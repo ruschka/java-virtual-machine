@@ -1,10 +1,21 @@
 package enviroment;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import object.ClassObject;
+import object.Reference;
+
 import org.apache.bcel.Repository;
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
 
 public class ClassLoader {
+	
+	/**
+	 * Mapa uchovajici objekty trid. Objekty trid slouzi pro uchovani statickych poli.
+	 */
+	private static Map<String, Reference> CLASSES = new HashMap<String, Reference>();
 	
 	public static JavaClass loadClass(String clazz) {
 		try {
@@ -22,6 +33,17 @@ public class ClassLoader {
 			}
 		}
 		throw new IllegalStateException("Method " + methodName + " not found.");
+	}
+	
+	public static Reference getClassObject(String clazz, Heap heap) {
+		Reference reference = CLASSES.get(clazz);
+		if (reference == null) {
+			ClassObject classObject = new ClassObject();
+			heap.addObject(classObject);
+			reference = new Reference(classObject);
+			CLASSES.put(clazz, reference);
+		}
+		return reference;
 	}
 
 }

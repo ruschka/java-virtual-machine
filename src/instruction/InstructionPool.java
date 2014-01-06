@@ -43,10 +43,13 @@ import instruction.integer.istore.Istore2Instruction;
 import instruction.integer.istore.Istore3Instruction;
 import instruction.integer.istore.IstoreInstruction;
 import instruction.object.GetFieldInstruction;
+import instruction.object.GetStaticInstruction;
 import instruction.object.InvokeSpecialInstruction;
+import instruction.object.InvokeStaticInstruction;
 import instruction.object.InvokeVirtualInstruction;
 import instruction.object.NewInstruction;
 import instruction.object.PutFieldInstruction;
+import instruction.object.PutStaticInstruction;
 import instruction.object.aload.Aload0Instruction;
 import instruction.object.aload.Aload1Instruction;
 import instruction.object.aload.Aload2Instruction;
@@ -116,9 +119,12 @@ public class InstructionPool {
 		
 		addInstruction(new NewInstruction());
 		addInstruction(new InvokeSpecialInstruction());
+		addInstruction(new InvokeStaticInstruction());
 		addInstruction(new InvokeVirtualInstruction());
 		addInstruction(new PutFieldInstruction());
 		addInstruction(new GetFieldInstruction());
+		addInstruction(new PutStaticInstruction());
+		addInstruction(new GetStaticInstruction());
 		
 		addInstruction(new DupInstruction());
 		addInstruction(new PopInstruction());

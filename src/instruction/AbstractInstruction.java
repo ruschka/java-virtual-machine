@@ -1,6 +1,7 @@
 package instruction;
 
 import object.ArrayObject;
+import object.ClassObject;
 import object.ComplexObject;
 import object.IntegerObject;
 import object.JavaObject;
@@ -10,9 +11,13 @@ import org.apache.bcel.classfile.ConstantCP;
 import org.apache.bcel.classfile.ConstantClass;
 import org.apache.bcel.classfile.ConstantNameAndType;
 import org.apache.bcel.classfile.ConstantUtf8;
+import org.apache.bcel.classfile.JavaClass;
+import org.apache.bcel.classfile.Method;
 
+import enviroment.ClassLoader;
 import enviroment.Frame;
 import enviroment.Heap;
+import enviroment.MethodRunner;
 
 public abstract class AbstractInstruction {
 	
@@ -84,6 +89,17 @@ public abstract class AbstractInstruction {
 	protected void checkArrayObject(Reference reference) {
 		if (!(reference.getObject() instanceof ArrayObject)) {
 			throw new IllegalStateException("Object has to be array object.");
+		}
+	}
+	
+	protected void checkInitialized(ClassObject object, String className, Heap heap) {
+		if (!object.isInitialized()) {
+			object.initialize();
+			JavaClass javaClass = ClassLoader.loadClass(className);
+			Method method = ClassLoader.getMethodByName(javaClass, "<clinit>", "()V");
+			Frame frame = new Frame(null, javaClass.getConstantPool(), method.getCode().getMaxLocals());
+			MethodRunner runner = new MethodRunner(method, frame, heap);
+			runner.run();
 		}
 	}
 
