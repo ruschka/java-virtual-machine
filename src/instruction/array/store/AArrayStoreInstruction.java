@@ -13,7 +13,7 @@ public class AArrayStoreInstruction extends AbstractArrayStoreInstruction {
 
 	@Override
 	protected void checkValueType(Reference valueReference) {
-		checkJavaObject(valueReference);
+		// checkComplexObject(valueReference); nemusi byt pravda, kdyz mame pole Object[]
 	}
 
 }

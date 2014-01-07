@@ -32,6 +32,7 @@ import instruction.integer.iconst.Iconst3Instruction;
 import instruction.integer.iconst.Iconst4Instruction;
 import instruction.integer.iconst.Iconst5Instruction;
 import instruction.integer.iconst.Iconstm1Instruction;
+import instruction.integer.iconst.SipushInstruction;
 import instruction.integer.iload.Iload0Instruction;
 import instruction.integer.iload.Iload1Instruction;
 import instruction.integer.iload.Iload2Instruction;
@@ -42,6 +43,7 @@ import instruction.integer.istore.Istore1Instruction;
 import instruction.integer.istore.Istore2Instruction;
 import instruction.integer.istore.Istore3Instruction;
 import instruction.integer.istore.IstoreInstruction;
+import instruction.object.AconstNullInstruction;
 import instruction.object.GetFieldInstruction;
 import instruction.object.GetStaticInstruction;
 import instruction.object.InvokeSpecialInstruction;
@@ -84,6 +86,7 @@ public class InstructionPool {
 		addInstruction(new Iconst4Instruction());
 		addInstruction(new Iconst5Instruction());
 		addInstruction(new BipushInstruction());
+		addInstruction(new SipushInstruction());
 		
 		addInstruction(new Istore0Instruction());
 		addInstruction(new Istore1Instruction());
@@ -125,6 +128,7 @@ public class InstructionPool {
 		addInstruction(new GetFieldInstruction());
 		addInstruction(new PutStaticInstruction());
 		addInstruction(new GetStaticInstruction());
+		addInstruction(new AconstNullInstruction());
 		
 		addInstruction(new DupInstruction());
 		addInstruction(new PopInstruction());

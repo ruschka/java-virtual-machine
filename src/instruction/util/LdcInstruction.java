@@ -1,6 +1,9 @@
 package instruction.util;
 
+import object.IntegerObject;
+
 import org.apache.bcel.classfile.Constant;
+import org.apache.bcel.classfile.ConstantInteger;
 import org.apache.bcel.classfile.ConstantString;
 import org.apache.bcel.classfile.ConstantUtf8;
 
@@ -26,8 +29,16 @@ public class LdcInstruction extends AbstractInstruction {
 			ConstantUtf8 stringConstant = (ConstantUtf8) frame.getConstant(stringIndex);
 			String string = stringConstant.getBytes();
 			// TODO dopsat - musi se poslat na zasobnik
+			throw new UnsupportedOperationException("TODO String z constant poolu na zasobnik.");
+		} else if (constant instanceof ConstantInteger) {
+			int value = ((ConstantInteger)constant).getBytes();
+			IntegerObject integerObject = new IntegerObject(value);
+			heap.addObject(integerObject);
+			frame.push(integerObject);
+		} else {
+			// TODO dopsat pro konstanty typu float
+			throw new UnsupportedOperationException("TODO Konstanta constant poolu na zasobnik.");
 		}
-		// TODO dopsat pro konstanty typu int a float
 		return getBytecodeIndex(bytecodeIndex);
 	}
 	
