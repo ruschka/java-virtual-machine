@@ -1,6 +1,7 @@
 package instruction.util;
 
 import object.IntegerObject;
+import object.StringObject;
 
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantInteger;
@@ -28,8 +29,9 @@ public class LdcInstruction extends AbstractInstruction {
 			int stringIndex = ((ConstantString)constant).getStringIndex();
 			ConstantUtf8 stringConstant = (ConstantUtf8) frame.getConstant(stringIndex);
 			String string = stringConstant.getBytes();
-			// TODO dopsat - musi se poslat na zasobnik
-			throw new UnsupportedOperationException("TODO String z constant poolu na zasobnik.");
+			StringObject stringObject = new StringObject(string);
+			heap.addObject(stringObject);
+			frame.push(stringObject);
 		} else if (constant instanceof ConstantInteger) {
 			int value = ((ConstantInteger)constant).getBytes();
 			IntegerObject integerObject = new IntegerObject(value);

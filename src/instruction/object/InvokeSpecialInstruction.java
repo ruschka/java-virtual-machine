@@ -1,7 +1,13 @@
 package instruction.object;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import instruction.AbstractInstruction;
 import object.Reference;
+import object.SimulatedFileReader;
+import object.SimulatedObject;
 
 import org.apache.bcel.classfile.JavaClass;
 import org.apache.bcel.classfile.Method;
@@ -30,6 +36,19 @@ public class InvokeSpecialInstruction extends AbstractInstruction {
 		FieldOrMethodInfo methodInfo = getFieldOrMethodInfo(frame, bytecode, bytecodeIndex);
 		MethodSignatureInfo signatureInfo = getMethodSignatureInfo(methodInfo.signature);
 		
+		if (isSimulated(methodInfo.className)) {
+			return simulatedInvoke(frame, heap, bytecode, bytecodeIndex, methodInfo, signatureInfo);
+		} else {
+			return standardInvoke(frame, heap, bytecode, bytecodeIndex, methodInfo, signatureInfo);
+		}
+	}
+	
+	@Override
+	protected int getBytecodeIndex(int bytecodeIndex) {
+		return bytecodeIndex + 3;
+	}
+	
+	private int standardInvoke(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, FieldOrMethodInfo methodInfo, MethodSignatureInfo signatureInfo) {
 		// tridu musime ziskat staticky (tak jak byla urcena pri kompilaci)
 		JavaClass clazz = ClassLoader.loadClass(methodInfo.className);
 		Method method = ClassLoader.getMethodByName(clazz, methodInfo.name, methodInfo.signature);
@@ -46,13 +65,16 @@ public class InvokeSpecialInstruction extends AbstractInstruction {
 		// spusteni metody
 		MethodRunner methodRunner = new MethodRunner(method, newFrame, heap);
 		methodRunner.run();
-		
 		return getBytecodeIndex(bytecodeIndex);
 	}
 	
-	@Override
-	protected int getBytecodeIndex(int bytecodeIndex) {
-		return bytecodeIndex + 3;
+	private int simulatedInvoke(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, FieldOrMethodInfo methodInfo, MethodSignatureInfo signatureInfo) {
+		LinkedList<Reference> arguments = getArguments(frame, signatureInfo);
+		Reference objectReference = frame.pop();
+		checkSimulatedObject(objectReference);
+		SimulatedObject<?> object = (SimulatedObject<?>) objectReference.getObject();
+		
+		return getBytecodeIndex(bytecodeIndex);
 	}
 
 }

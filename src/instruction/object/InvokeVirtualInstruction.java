@@ -31,10 +31,7 @@ public class InvokeVirtualInstruction extends AbstractInstruction {
 		MethodSignatureInfo signatureInfo = getMethodSignatureInfo(methodInfo.signature);
 		
 		// musime uchovat argumenty
-		LinkedList<Reference> arguments = new LinkedList<Reference>();
-		for (int i = 0; i < signatureInfo.argumentCount; i++) {
-			arguments.add(frame.pop());
-		}
+		LinkedList<Reference> arguments = getArguments(frame, signatureInfo);
 		
 		// metodu musime ziskat dynamicky z pushnuteho objektu
 		Reference objectReference = frame.pop();

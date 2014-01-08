@@ -1,11 +1,17 @@
 package instruction;
 
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
+
 import object.ArrayObject;
 import object.ClassObject;
 import object.ComplexObject;
 import object.IntegerObject;
 import object.JavaObject;
 import object.Reference;
+import object.SimulatedFileReader;
+import object.SimulatedObject;
 
 import org.apache.bcel.classfile.ConstantCP;
 import org.apache.bcel.classfile.ConstantClass;
@@ -21,6 +27,12 @@ import enviroment.MethodRunner;
 
 public abstract class AbstractInstruction {
 	
+	private static final Set<String> SIMULATED_CLASSES = new HashSet<String>();
+	
+	static {
+		SIMULATED_CLASSES.add(SimulatedFileReader.CLASS_NAME);
+	}
+	
 	public abstract String getOpcode();
 	
 	/**
@@ -32,6 +44,10 @@ public abstract class AbstractInstruction {
 	 * @return Vrati aktualni bytecodeIndex po provedeni instrukce.
 	 */
 	public abstract int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex);
+	
+	protected boolean isSimulated(String className) {
+		return SIMULATED_CLASSES.contains(className);
+	}
 	
 	/**
 	 * Default posunuti indexu ukazujiciho na aktualni pozici v bytecodu.
@@ -92,6 +108,12 @@ public abstract class AbstractInstruction {
 		}
 	}
 	
+	protected void checkSimulatedObject(Reference reference) {
+		if (!(reference.getObject() instanceof SimulatedObject)) {
+			throw new IllegalStateException("Object has to be simulated object.");
+		}
+	}
+	
 	protected void checkInitialized(ClassObject object, String className, Heap heap) {
 		if (!object.isInitialized()) {
 			object.initialize();
@@ -101,6 +123,14 @@ public abstract class AbstractInstruction {
 			MethodRunner runner = new MethodRunner(method, frame, heap);
 			runner.run();
 		}
+	}
+	
+	protected LinkedList<Reference> getArguments(Frame frame, MethodSignatureInfo info) {
+		LinkedList<Reference> arguments = new LinkedList<Reference>();
+		for (int i = 0; i < info.argumentCount; i++) {
+			arguments.add(frame.pop());
+		}
+		return arguments;
 	}
 
 	protected FieldOrMethodInfo getFieldOrMethodInfo(Frame frame, byte[] bytecode, int bytecodeIndex) {
@@ -176,7 +206,7 @@ public abstract class AbstractInstruction {
 		return argumentCount;
 	}
 	
-	protected class FieldOrMethodInfo {
+	public class FieldOrMethodInfo {
 		
 		/**
 		 * nazev tridy
@@ -193,7 +223,7 @@ public abstract class AbstractInstruction {
 		
 	}
 	
-	protected class MethodSignatureInfo {
+	public class MethodSignatureInfo {
 		
 		/**
 		 * pocet argumentu metody

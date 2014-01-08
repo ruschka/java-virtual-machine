@@ -1,7 +1,9 @@
 package instruction.object;
 
 import instruction.AbstractInstruction;
+import object.AbstractObject;
 import object.JavaObject;
+import object.SimulatedFileReader;
 
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantClass;
@@ -28,9 +30,19 @@ public class NewInstruction extends AbstractInstruction {
 		int nameIndex = ((ConstantClass)constant).getNameIndex();
 		Constant nameConstant = frame.getConstant(nameIndex);
 		String className = ((ConstantUtf8)nameConstant).getBytes();
-		// TODO tady rozhodovat, zda tridu simulovat nebo opravdu vytvorit objekt
-		JavaClass loadedClass = ClassLoader.loadClass(className);
-		JavaObject object = new JavaObject(loadedClass);
+		AbstractObject object = null;
+		if (isSimulated(className)) {
+			// TODO upravit bez if
+			if (SimulatedFileReader.CLASS_NAME.equals(className)) {
+				object = new SimulatedFileReader();
+			}
+		} else {
+			JavaClass loadedClass = ClassLoader.loadClass(className);
+			object = new JavaObject(loadedClass);
+		}
+		if (object == null) {
+			throw new IllegalStateException("Object cannot be null.");
+		}
 		heap.addObject(object);
 		frame.push(object);
 		return getBytecodeIndex(bytecodeIndex);
