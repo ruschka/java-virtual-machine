@@ -8,7 +8,7 @@ public abstract class AbstractConditionInstruction extends AbstractInstruction {
 
 	@Override
 	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
-		int offset = getIntegerFromNextTwoBytes(bytecode, bytecodeIndex);
+		short offset = getShortFromNextTwoBytes(bytecode, bytecodeIndex);
 		if (evaluateCondition(frame)) {
 			return bytecodeIndex + offset;
 		}

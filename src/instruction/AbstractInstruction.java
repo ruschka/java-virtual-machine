@@ -86,6 +86,10 @@ public abstract class AbstractInstruction {
 		return b1 | b2;
 	}
 	
+	protected short getShortFromNextTwoBytes(byte[] bytecode, int bytecodeIndex) {
+		return (short) getIntegerFromNextTwoBytes(bytecode, bytecodeIndex);
+	}
+	
 	protected void checkInteger(Reference reference) {
 		if (!(reference.getObject() instanceof IntegerObject)) {
 			throw new IllegalStateException("Object has to be integer.");

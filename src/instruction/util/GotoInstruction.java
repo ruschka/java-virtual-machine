@@ -15,7 +15,7 @@ public class GotoInstruction extends AbstractInstruction {
 
 	@Override
 	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
-		int offset = getIntegerFromNextTwoBytes(bytecode, bytecodeIndex);
+		short offset = getShortFromNextTwoBytes(bytecode, bytecodeIndex);
 		return bytecodeIndex + offset;
 	}
 
