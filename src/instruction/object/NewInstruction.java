@@ -4,6 +4,7 @@ import instruction.AbstractInstruction;
 import object.AbstractObject;
 import object.JavaObject;
 import object.SimulatedFileReader;
+import object.SimulatedFileWriter;
 
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantClass;
@@ -35,6 +36,8 @@ public class NewInstruction extends AbstractInstruction {
 			// TODO upravit bez if
 			if (SimulatedFileReader.CLASS_NAME.equals(className)) {
 				object = new SimulatedFileReader();
+			} else if (SimulatedFileWriter.CLASS_NAME.equals(className)) {
+				object = new SimulatedFileWriter();
 			}
 		} else {
 			JavaClass loadedClass = ClassLoader.loadClass(className);

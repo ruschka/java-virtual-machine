@@ -18,7 +18,7 @@ public abstract class SimulatedObject<T> extends AbstractObject {
 	
 	public void setObject(T object) {
 		if (object != null) {
-			throw new IllegalStateException("Object allready set.");
+			throw new IllegalStateException("Object already set.");
 		}
 		this.object = object;
 	}

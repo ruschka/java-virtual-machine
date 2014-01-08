@@ -11,6 +11,7 @@ import object.IntegerObject;
 import object.JavaObject;
 import object.Reference;
 import object.SimulatedFileReader;
+import object.SimulatedFileWriter;
 import object.SimulatedObject;
 
 import org.apache.bcel.classfile.ConstantCP;
@@ -31,6 +32,7 @@ public abstract class AbstractInstruction {
 	
 	static {
 		SIMULATED_CLASSES.add(SimulatedFileReader.CLASS_NAME);
+		SIMULATED_CLASSES.add(SimulatedFileWriter.CLASS_NAME);
 	}
 	
 	public abstract String getOpcode();

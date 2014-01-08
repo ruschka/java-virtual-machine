@@ -1,7 +1,6 @@
 package object;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
@@ -9,13 +8,13 @@ import enviroment.Frame;
 import enviroment.Heap;
 import enviroment.MethodSimulator;
 
-public class SimulatedFileReader extends SimulatedObject<FileReader> {
+public class SimulatedFileWriter extends SimulatedObject<FileWriter> {
 	
-	public static String CLASS_NAME = "java/io/FileReader";
+	public static String CLASS_NAME = "java/io/FileWriter";
 	
-	public SimulatedFileReader() {
+	public SimulatedFileWriter() {
 		addMethodSimulator(new ConstructorSimulator());
-		addMethodSimulator(new ReadSimulator());
+		addMethodSimulator(new WriteSimulator());
 		addMethodSimulator(new CloseSimulator());
 	}
 
@@ -25,15 +24,15 @@ public class SimulatedFileReader extends SimulatedObject<FileReader> {
 	}
 	
 	/**
-	 * http://docs.oracle.com/javase/7/docs/api/java/io/FileReader.html#FileReader(java.lang.String)
+	 * http://docs.oracle.com/javase/7/docs/api/java/io/FileWriter.html#FileWriter(java.lang.String)
 	 * @author ruschka
 	 *
 	 */
 	private class ConstructorSimulator extends MethodSimulator {
-
+		
 		private static final String METHOD_NAME = "<init>";
 		private static final String METHOD_SIGNATURE = "(Ljava/lang/String;)V";
-		
+
 		@Override
 		public void run(Frame frame, Heap heap, List<Reference> arguments) {
 			if (arguments.size() != 1) {
@@ -41,9 +40,9 @@ public class SimulatedFileReader extends SimulatedObject<FileReader> {
 			}
 			StringObject stringObject = (StringObject) arguments.get(0).getObject();
 			try {
-				object = new FileReader(stringObject.getValue());
-			} catch (FileNotFoundException e) {
-				throw new IllegalStateException("Error while creating FileReader.", e);
+				object = new FileWriter(stringObject.getValue());
+			} catch (IOException e) {
+				throw new IllegalStateException("Error while creating FileWriter.", e);
 			}
 		}
 
@@ -60,29 +59,26 @@ public class SimulatedFileReader extends SimulatedObject<FileReader> {
 	}
 	
 	/**
-	 * http://docs.oracle.com/javase/7/docs/api/java/io/Reader.html#read()
+	 * http://docs.oracle.com/javase/7/docs/api/java/io/Writer.html#write(int)
 	 * @author ruschka
 	 *
 	 */
-	private class ReadSimulator extends MethodSimulator {
+	public class WriteSimulator extends MethodSimulator {
 		
-		private static final String METHOD_NAME = "read";
-		private static final String METHOD_SIGNATURE = "()I";
+		private static final String METHOD_NAME = "write";
+		private static final String METHOD_SIGNATURE = "(I)V";
 
 		@Override
 		public void run(Frame frame, Heap heap, List<Reference> arguments) {
-			if (arguments.size() != 0) {
-				throw new IllegalStateException("Arguments size has to be 0.");
+			if (arguments.size() != 1) {
+				throw new IllegalStateException("Arguments size has to be 1.");
 			}
-			int value = 0;
+			IntegerObject integerObject = (IntegerObject) arguments.get(0).getObject();
 			try {
-				value = object.read();
+				object.write(integerObject.getValue());
 			} catch (IOException e) {
-				throw new IllegalStateException("Exception while reading file.", e);
+				throw new IllegalStateException("Error while writing to file.", e);
 			}
-			IntegerObject integerObject = new IntegerObject(value);
-			heap.addObject(integerObject);
-			frame.push(integerObject);
 		}
 
 		@Override
