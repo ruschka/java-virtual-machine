@@ -30,6 +30,19 @@ public class InvokeVirtualInstruction extends AbstractInstruction {
 		FieldOrMethodInfo methodInfo = getFieldOrMethodInfo(frame, bytecode, bytecodeIndex);
 		MethodSignatureInfo signatureInfo = getMethodSignatureInfo(methodInfo.signature);
 		
+		if (isSimulated(methodInfo.className)) {
+			return simulatedInvoke(frame, heap, bytecode, bytecodeIndex, methodInfo, signatureInfo);
+		} else {
+			return standardInvoke(frame, heap, bytecode, bytecodeIndex, methodInfo, signatureInfo);
+		}
+	}
+	
+	@Override
+	protected int getBytecodeIndex(int bytecodeIndex) {
+		return bytecodeIndex + 3;
+	}
+	
+	private int standardInvoke(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, FieldOrMethodInfo methodInfo, MethodSignatureInfo signatureInfo) {
 		// musime uchovat argumenty
 		LinkedList<Reference> arguments = getArguments(frame, signatureInfo);
 		
@@ -51,11 +64,6 @@ public class InvokeVirtualInstruction extends AbstractInstruction {
 		methodRunner.run();
 		
 		return getBytecodeIndex(bytecodeIndex);
-	}
-	
-	@Override
-	protected int getBytecodeIndex(int bytecodeIndex) {
-		return bytecodeIndex + 3;
 	}
 
 }

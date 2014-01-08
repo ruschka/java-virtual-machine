@@ -91,7 +91,7 @@ public abstract class AbstractInstruction {
 	}
 	
 	protected void checkComplexObject(Reference reference) {
-		if (!(reference.getObject() instanceof ComplexObject)) {
+		if (!(reference.getObject() instanceof ComplexObject) && !(reference.getObject() instanceof SimulatedObject)) {
 			throw new IllegalStateException("Object has to be complex object.");
 		}
 	}
@@ -131,6 +131,15 @@ public abstract class AbstractInstruction {
 			arguments.add(frame.pop());
 		}
 		return arguments;
+	}
+	
+	protected int simulatedInvoke(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, FieldOrMethodInfo methodInfo, MethodSignatureInfo signatureInfo) {
+		LinkedList<Reference> arguments = getArguments(frame, signatureInfo);
+		Reference objectReference = frame.pop();
+		checkSimulatedObject(objectReference);
+		SimulatedObject<?> object = (SimulatedObject<?>) objectReference.getObject();
+		object.simulateMethod(frame, heap, methodInfo, arguments);
+		return getBytecodeIndex(bytecodeIndex);
 	}
 
 	protected FieldOrMethodInfo getFieldOrMethodInfo(Frame frame, byte[] bytecode, int bytecodeIndex) {
