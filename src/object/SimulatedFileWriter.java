@@ -38,9 +38,9 @@ public class SimulatedFileWriter extends SimulatedObject<FileWriter> {
 			if (arguments.size() != 1) {
 				throw new IllegalStateException("Arguments size has to be 1.");
 			}
-			StringObject stringObject = (StringObject) arguments.get(0).getObject();
+			SimulatedString stringObject = (SimulatedString) arguments.get(0).getObject();
 			try {
-				object = new FileWriter(stringObject.getValue());
+				object = new FileWriter(stringObject.getObject());
 			} catch (IOException e) {
 				throw new IllegalStateException("Error while creating FileWriter.", e);
 			}

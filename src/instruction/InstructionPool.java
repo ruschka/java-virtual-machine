@@ -23,6 +23,7 @@ import instruction.condition.IfneInstruction;
 import instruction.integer.iarithmetic.IaddInstruction;
 import instruction.integer.iarithmetic.IdivInstruction;
 import instruction.integer.iarithmetic.ImulInstruction;
+import instruction.integer.iarithmetic.IremInstruction;
 import instruction.integer.iarithmetic.IsubInstruction;
 import instruction.integer.iconst.BipushInstruction;
 import instruction.integer.iconst.Iconst0Instruction;
@@ -104,6 +105,7 @@ public class InstructionPool {
 		addInstruction(new IsubInstruction());
 		addInstruction(new ImulInstruction());
 		addInstruction(new IdivInstruction());
+		addInstruction(new IremInstruction());
 		
 		addInstruction(new Astore0Instruction());
 		addInstruction(new Astore1Instruction());

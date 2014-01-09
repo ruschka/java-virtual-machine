@@ -1,7 +1,8 @@
 package instruction.util;
 
+import instruction.AbstractInstruction;
 import object.IntegerObject;
-import object.StringObject;
+import object.SimulatedString;
 
 import org.apache.bcel.classfile.Constant;
 import org.apache.bcel.classfile.ConstantInteger;
@@ -10,7 +11,6 @@ import org.apache.bcel.classfile.ConstantUtf8;
 
 import enviroment.Frame;
 import enviroment.Heap;
-import instruction.AbstractInstruction;
 
 public class LdcInstruction extends AbstractInstruction {
 	
@@ -29,7 +29,7 @@ public class LdcInstruction extends AbstractInstruction {
 			int stringIndex = ((ConstantString)constant).getStringIndex();
 			ConstantUtf8 stringConstant = (ConstantUtf8) frame.getConstant(stringIndex);
 			String string = stringConstant.getBytes();
-			StringObject stringObject = new StringObject(string);
+			SimulatedString stringObject = new SimulatedString(string);
 			heap.addObject(stringObject);
 			frame.push(stringObject);
 		} else if (constant instanceof ConstantInteger) {

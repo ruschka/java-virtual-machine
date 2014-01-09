@@ -16,11 +16,23 @@ public abstract class SimulatedObject<T> extends AbstractObject {
 	
 	protected T object;
 	
+	public SimulatedObject() {
+		
+	}
+	
+	public SimulatedObject(T object) {
+		this.object = object;
+	}
+	
 	public void setObject(T object) {
-		if (object != null) {
+		if (this.object != null) {
 			throw new IllegalStateException("Object already set.");
 		}
 		this.object = object;
+	}
+	
+	public T getObject() {
+		return object;
 	}
 	
 	public abstract String getClassName();

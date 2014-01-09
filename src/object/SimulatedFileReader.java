@@ -39,9 +39,9 @@ public class SimulatedFileReader extends SimulatedObject<FileReader> {
 			if (arguments.size() != 1) {
 				throw new IllegalStateException("Arguments size has to be 1.");
 			}
-			StringObject stringObject = (StringObject) arguments.get(0).getObject();
+			SimulatedString stringObject = (SimulatedString) arguments.get(0).getObject();
 			try {
-				object = new FileReader(stringObject.getValue());
+				object = new FileReader(stringObject.getObject());
 			} catch (FileNotFoundException e) {
 				throw new IllegalStateException("Error while creating FileReader.", e);
 			}

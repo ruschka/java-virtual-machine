@@ -2,9 +2,8 @@ package instruction.returns;
 
 import enviroment.Frame;
 import enviroment.Heap;
-import instruction.AbstractInstruction;
 
-public class ReturnInstruction extends AbstractInstruction {
+public class ReturnInstruction extends AbstractReturnInstruction {
 	
 	public static final String OPCODE = "B1";
 

@@ -13,6 +13,7 @@ import object.Reference;
 import object.SimulatedFileReader;
 import object.SimulatedFileWriter;
 import object.SimulatedObject;
+import object.SimulatedString;
 
 import org.apache.bcel.classfile.ConstantCP;
 import org.apache.bcel.classfile.ConstantClass;
@@ -33,6 +34,7 @@ public abstract class AbstractInstruction {
 	static {
 		SIMULATED_CLASSES.add(SimulatedFileReader.CLASS_NAME);
 		SIMULATED_CLASSES.add(SimulatedFileWriter.CLASS_NAME);
+		SIMULATED_CLASSES.add(SimulatedString.CLASS_NAME);
 	}
 	
 	public abstract String getOpcode();
