@@ -12,7 +12,7 @@ public class BipushInstruction extends IconstInstruction {
 
 	@Override
 	protected Integer getValue(byte[] bytecode, int bytecodeIndex) {
-		return getIntegerFormNextByte(bytecode, bytecodeIndex);
+		return getIntegerFromNextByte(bytecode, bytecodeIndex);
 	}
 	
 	@Override

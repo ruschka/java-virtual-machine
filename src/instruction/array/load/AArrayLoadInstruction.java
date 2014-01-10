@@ -13,7 +13,7 @@ public class AArrayLoadInstruction extends AbstractArrayLoadInstruction {
 
 	@Override
 	protected void checkValue(Reference valueReference) {
-		checkJavaObject(valueReference);
+		checkComplexObject(valueReference);
 	}
 
 }

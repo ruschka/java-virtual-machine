@@ -72,8 +72,12 @@ public abstract class AbstractInstruction {
 	 * @param bytecodeIndex
 	 * @return
 	 */
-	protected int getIntegerFormNextByte(byte[] bytecode, int bytecodeIndex) {
-		return ((int)bytecode[bytecodeIndex + 1]) & 0xFF;
+	protected int getIntegerFromNextByte(byte[] bytecode, int bytecodeIndex) {
+		return ((int)getByteFromNextByte(bytecode, bytecodeIndex)) & 0xFF;
+	}
+	
+	protected byte getByteFromNextByte(byte[] bytecode, int bytecodeIndex) {
+		return bytecode[bytecodeIndex + 1];
 	}
 	
 	/**

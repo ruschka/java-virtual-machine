@@ -17,8 +17,8 @@ public class IincInstruction extends AbstractInstruction {
 
 	@Override
 	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
-		int index = getIntegerFormNextByte(bytecode, bytecodeIndex);
-		int value = getIntegerFormNextByte(bytecode, bytecodeIndex + 1);
+		int index = getIntegerFromNextByte(bytecode, bytecodeIndex);
+		int value = getByteFromNextByte(bytecode, bytecodeIndex + 1);
 		Reference localReference = frame.getLocal(index);
 		int local = ((IntegerObject)localReference.getObject()).getValue();
 		IntegerObject newLocal = new IntegerObject(local + value);

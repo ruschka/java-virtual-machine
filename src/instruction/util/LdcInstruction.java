@@ -23,7 +23,7 @@ public class LdcInstruction extends AbstractInstruction {
 
 	@Override
 	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
-		int index = getIntegerFormNextByte(bytecode, bytecodeIndex);
+		int index = getIntegerFromNextByte(bytecode, bytecodeIndex);
 		Constant constant = frame.getConstant(index);
 		if (constant instanceof ConstantString) {
 			int stringIndex = ((ConstantString)constant).getStringIndex();
