@@ -4,6 +4,7 @@ import object.IntegerObject;
 import object.Reference;
 import enviroment.Frame;
 import enviroment.Heap;
+import garbagecollector.IGarbageCollector;
 import instruction.AbstractInstruction;
 
 public class IincInstruction extends AbstractInstruction {
@@ -16,7 +17,7 @@ public class IincInstruction extends AbstractInstruction {
 	}
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
+	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, IGarbageCollector garbageCollector) {
 		int index = getIntegerFromNextByte(bytecode, bytecodeIndex);
 		int value = getByteFromNextByte(bytecode, bytecodeIndex + 1);
 		Reference localReference = frame.getLocal(index);

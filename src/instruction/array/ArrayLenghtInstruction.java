@@ -5,6 +5,7 @@ import object.IntegerObject;
 import object.Reference;
 import enviroment.Frame;
 import enviroment.Heap;
+import garbagecollector.IGarbageCollector;
 import instruction.AbstractInstruction;
 
 public class ArrayLenghtInstruction extends AbstractInstruction {
@@ -17,7 +18,7 @@ public class ArrayLenghtInstruction extends AbstractInstruction {
 	}
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
+	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, IGarbageCollector garbageCollector) {
 		Reference arrayReference = frame.pop();
 		checkArrayObject(arrayReference);
 		ArrayObject array = (ArrayObject) arrayReference.getObject();

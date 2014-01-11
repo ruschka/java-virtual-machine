@@ -2,6 +2,7 @@ package instruction.returns;
 
 import enviroment.Frame;
 import enviroment.Heap;
+import garbagecollector.IGarbageCollector;
 
 public class ReturnInstruction extends AbstractReturnInstruction {
 	
@@ -13,7 +14,7 @@ public class ReturnInstruction extends AbstractReturnInstruction {
 	}
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
+	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, IGarbageCollector garbageCollector) {
 		return getBytecodeIndex(bytecodeIndex);
 	}
 

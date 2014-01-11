@@ -2,6 +2,7 @@ package instruction.util;
 
 import enviroment.Frame;
 import enviroment.Heap;
+import garbagecollector.IGarbageCollector;
 import instruction.AbstractInstruction;
 
 public class GotoInstruction extends AbstractInstruction {
@@ -14,7 +15,7 @@ public class GotoInstruction extends AbstractInstruction {
 	}
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
+	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, IGarbageCollector garbageCollector) {
 		short offset = getShortFromNextTwoBytes(bytecode, bytecodeIndex);
 		return bytecodeIndex + offset;
 	}

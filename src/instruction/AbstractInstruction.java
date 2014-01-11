@@ -26,6 +26,7 @@ import enviroment.ClassLoader;
 import enviroment.Frame;
 import enviroment.Heap;
 import enviroment.MethodRunner;
+import garbagecollector.IGarbageCollector;
 
 public abstract class AbstractInstruction {
 	
@@ -45,9 +46,10 @@ public abstract class AbstractInstruction {
 	 * @param heap heap
 	 * @param bytecode bytecode provadene metody.
 	 * @param bytecodeIndex bytecodeIndex pred provedenim instrukce.
+	 * @param garbageCollector TODO
 	 * @return Vrati aktualni bytecodeIndex po provedeni instrukce.
 	 */
-	public abstract int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex);
+	public abstract int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, IGarbageCollector garbageCollector);
 	
 	protected boolean isSimulated(String className) {
 		return SIMULATED_CLASSES.contains(className);
@@ -76,6 +78,13 @@ public abstract class AbstractInstruction {
 		return ((int)getByteFromNextByte(bytecode, bytecodeIndex)) & 0xFF;
 	}
 	
+	/**
+	 * Z nasledujiciho bytu (oproti bytecodeIndexu) v bytecodu vyrobi byte.
+	 * Vysledek muze byt i zaporne cislo (oproti getIntegerFromNextByte).
+	 * @param bytecode
+	 * @param bytecodeIndex
+	 * @return
+	 */
 	protected byte getByteFromNextByte(byte[] bytecode, int bytecodeIndex) {
 		return bytecode[bytecodeIndex + 1];
 	}
@@ -91,7 +100,13 @@ public abstract class AbstractInstruction {
 		int b2 = ((int)bytecode[bytecodeIndex + 2]) & 0xFF;
 		return b1 | b2;
 	}
-	
+	/**
+	 * Z nasledujiciho dvou bytu (oproti bytecodeIndexu) v bytecodu vyrobi short.
+	 * Vysledek muze byt i zaporne cislo (oproti getIntegerFromNextTwoBytes).
+	 * @param bytecode
+	 * @param bytecodeIndex
+	 * @return
+	 */
 	protected short getShortFromNextTwoBytes(byte[] bytecode, int bytecodeIndex) {
 		return (short) getIntegerFromNextTwoBytes(bytecode, bytecodeIndex);
 	}
@@ -126,13 +141,13 @@ public abstract class AbstractInstruction {
 		}
 	}
 	
-	protected void checkInitialized(ClassObject object, String className, Heap heap) {
+	protected void checkInitialized(ClassObject object, String className, Heap heap, IGarbageCollector garbageCollector) {
 		if (!object.isInitialized()) {
 			object.initialize();
 			JavaClass javaClass = ClassLoader.loadClass(className);
 			Method method = ClassLoader.getMethodByName(javaClass, "<clinit>", "()V");
 			Frame frame = new Frame(null, javaClass.getConstantPool(), method.getCode().getMaxLocals());
-			MethodRunner runner = new MethodRunner(method, frame, heap);
+			MethodRunner runner = new MethodRunner(method, frame, heap, garbageCollector);
 			runner.run();
 		}
 	}

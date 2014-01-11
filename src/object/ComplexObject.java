@@ -1,5 +1,6 @@
 package object;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +14,10 @@ public abstract class ComplexObject extends AbstractObject {
 	
 	public Reference getField(String field) {
 		return fields.get(field);
+	}
+	
+	public Collection<Reference> getReferences() {
+		return fields.values();
 	}
 
 }

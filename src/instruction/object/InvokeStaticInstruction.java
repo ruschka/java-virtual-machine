@@ -1,5 +1,6 @@
 package instruction.object;
 
+import garbagecollector.IGarbageCollector;
 import instruction.AbstractInstruction;
 
 import org.apache.bcel.classfile.JavaClass;
@@ -20,7 +21,7 @@ public class InvokeStaticInstruction extends AbstractInstruction {
 	}
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
+	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, IGarbageCollector garbageCollector) {
 		FieldOrMethodInfo methodInfo = getFieldOrMethodInfo(frame, bytecode, bytecodeIndex);
 		MethodSignatureInfo signatureInfo = getMethodSignatureInfo(methodInfo.signature);
 		
@@ -33,7 +34,7 @@ public class InvokeStaticInstruction extends AbstractInstruction {
 			newFrame.setLocal(i, frame.pop().getObject());
 		}
 		// spusteni metody
-		MethodRunner methodRunner = new MethodRunner(method, newFrame, heap);
+		MethodRunner methodRunner = new MethodRunner(method, newFrame, heap, garbageCollector);
 		methodRunner.run();
 		
 		return getBytecodeIndex(bytecodeIndex);

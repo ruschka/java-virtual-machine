@@ -2,6 +2,7 @@ package instruction.object;
 
 import object.JavaObject;
 import object.Reference;
+import garbagecollector.IGarbageCollector;
 import instruction.AbstractInstruction;
 import enviroment.Frame;
 import enviroment.Heap;
@@ -16,7 +17,7 @@ public class GetFieldInstruction extends AbstractInstruction {
 	}
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
+	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, IGarbageCollector garbageCollector) {
 		FieldOrMethodInfo fieldInfo = getFieldOrMethodInfo(frame, bytecode, bytecodeIndex);
 		Reference objectReference = frame.pop();
 		

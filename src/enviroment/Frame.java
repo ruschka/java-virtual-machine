@@ -51,4 +51,12 @@ public class Frame {
 		return constantPool.getConstant(index);
 	}
 
+	public LinkedList<Reference> getStack() {
+		return stack;
+	}
+
+	public Reference[] getLocalVariables() {
+		return localVariables;
+	}
+
 }

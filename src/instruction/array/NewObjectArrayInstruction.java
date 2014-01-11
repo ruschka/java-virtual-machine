@@ -5,6 +5,7 @@ import object.IntegerObject;
 import object.Reference;
 import enviroment.Frame;
 import enviroment.Heap;
+import garbagecollector.IGarbageCollector;
 import instruction.AbstractInstruction;
 
 public class NewObjectArrayInstruction extends AbstractInstruction {
@@ -17,7 +18,7 @@ public class NewObjectArrayInstruction extends AbstractInstruction {
 	}
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
+	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, IGarbageCollector garbageCollector) {
 		// TODO dalsi dva byty jsou typ (index do constant poolu), ktery urcuje typ pole. mel by se ulozit do objektu pole pro dalsi kontroly.
 		Reference lenghtReference = frame.pop();
 		Integer lenght = ((IntegerObject)lenghtReference.getObject()).getValue();

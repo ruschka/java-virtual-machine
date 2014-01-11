@@ -5,12 +5,13 @@ import object.IntegerObject;
 import object.Reference;
 import enviroment.Frame;
 import enviroment.Heap;
+import garbagecollector.IGarbageCollector;
 import instruction.AbstractInstruction;
 
 public abstract class AbstractArrayLoadInstruction extends AbstractInstruction {
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
+	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, IGarbageCollector garbageCollector) {
 		Reference indexReference = frame.pop();
 		Reference arrayReference = frame.pop();
 		checkInteger(indexReference);

@@ -1,5 +1,6 @@
 package instruction.object;
 
+import garbagecollector.IGarbageCollector;
 import instruction.AbstractInstruction;
 import object.ClassObject;
 import object.Reference;
@@ -17,12 +18,12 @@ public class GetStaticInstruction extends AbstractInstruction {
 	}
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
+	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, IGarbageCollector garbageCollector) {
 		FieldOrMethodInfo info = getFieldOrMethodInfo(frame, bytecode, bytecodeIndex);
 		Reference classObjectReference = ClassLoader.getClassObject(info.className, heap);
 		ClassObject classObject = (ClassObject) classObjectReference.getObject();
 		
-		checkInitialized(classObject, info.className, heap);
+		checkInitialized(classObject, info.className, heap, garbageCollector);
 		
 		frame.push(classObject.getField(info.name).getObject());
 		return getBytecodeIndex(bytecodeIndex);

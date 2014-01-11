@@ -3,6 +3,7 @@ package instruction.returns;
 import object.Reference;
 import enviroment.Frame;
 import enviroment.Heap;
+import garbagecollector.IGarbageCollector;
 
 /**
  * http://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html#jvms-6.5.ireturn
@@ -19,7 +20,7 @@ public class IReturnInstruction extends AbstractReturnInstruction {
 	}
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
+	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, IGarbageCollector garbageCollector) {
 		Reference reference = frame.pop();
 		checkInteger(reference);
 		frame.getParent().push(reference.getObject());

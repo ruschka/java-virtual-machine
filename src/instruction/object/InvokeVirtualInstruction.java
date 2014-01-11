@@ -1,5 +1,6 @@
 package instruction.object;
 
+import garbagecollector.IGarbageCollector;
 import instruction.AbstractInstruction;
 
 import java.util.LinkedList;
@@ -26,14 +27,14 @@ public class InvokeVirtualInstruction extends AbstractInstruction {
 	}
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
+	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, IGarbageCollector garbageCollector) {
 		FieldOrMethodInfo methodInfo = getFieldOrMethodInfo(frame, bytecode, bytecodeIndex);
 		MethodSignatureInfo signatureInfo = getMethodSignatureInfo(methodInfo.signature);
 		
 		if (isSimulated(methodInfo.className)) {
 			return simulatedInvoke(frame, heap, bytecode, bytecodeIndex, methodInfo, signatureInfo);
 		} else {
-			return standardInvoke(frame, heap, bytecode, bytecodeIndex, methodInfo, signatureInfo);
+			return standardInvoke(frame, heap, bytecode, bytecodeIndex, methodInfo, signatureInfo, garbageCollector);
 		}
 	}
 	
@@ -42,7 +43,7 @@ public class InvokeVirtualInstruction extends AbstractInstruction {
 		return bytecodeIndex + 3;
 	}
 	
-	private int standardInvoke(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, FieldOrMethodInfo methodInfo, MethodSignatureInfo signatureInfo) {
+	private int standardInvoke(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, FieldOrMethodInfo methodInfo, MethodSignatureInfo signatureInfo, IGarbageCollector garbageCollector) {
 		// musime uchovat argumenty
 		LinkedList<Reference> arguments = getArguments(frame, signatureInfo);
 		
@@ -60,7 +61,7 @@ public class InvokeVirtualInstruction extends AbstractInstruction {
 		newFrame.setLocal(Frame.THIS, objectReference.getObject());
 		
 		// spusteni metody
-		MethodRunner methodRunner = new MethodRunner(method, newFrame, heap);
+		MethodRunner methodRunner = new MethodRunner(method, newFrame, heap, garbageCollector);
 		methodRunner.run();
 		
 		return getBytecodeIndex(bytecodeIndex);

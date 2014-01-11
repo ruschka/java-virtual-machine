@@ -1,5 +1,6 @@
 package instruction.object;
 
+import garbagecollector.IGarbageCollector;
 import instruction.AbstractInstruction;
 import object.AbstractObject;
 import object.JavaObject;
@@ -25,7 +26,7 @@ public class NewInstruction extends AbstractInstruction {
 	}
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
+	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, IGarbageCollector garbageCollector) {
 		int index = getIntegerFromNextTwoBytes(bytecode, bytecodeIndex);
 		Constant constant = frame.getConstant(index);
 		int nameIndex = ((ConstantClass)constant).getNameIndex();

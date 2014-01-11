@@ -1,5 +1,8 @@
 package enviroment;
 
+import garbagecollector.BakerGarbageCollector;
+import garbagecollector.IGarbageCollector;
+
 import java.util.Arrays;
 
 import object.ArrayObject;
@@ -38,7 +41,8 @@ public class Controller {
 		ArrayObject argsForProgram = getArgsForProgram(heap);
 		Frame frame = new Frame(null, mainClass.getConstantPool(), mainMethod.getCode().getMaxLocals());
 		frame.setLocal(0, argsForProgram);
-		MethodRunner methodRunner = new MethodRunner(mainMethod, frame, heap);
+		IGarbageCollector garbageCollector = new BakerGarbageCollector();
+		MethodRunner methodRunner = new MethodRunner(mainMethod, frame, heap, garbageCollector);
 		methodRunner.run();
 	}
 	

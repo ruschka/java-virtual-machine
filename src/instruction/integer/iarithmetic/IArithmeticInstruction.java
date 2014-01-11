@@ -4,12 +4,13 @@ import object.IntegerObject;
 import object.Reference;
 import enviroment.Frame;
 import enviroment.Heap;
+import garbagecollector.IGarbageCollector;
 import instruction.AbstractInstruction;
 
 public abstract class IArithmeticInstruction extends AbstractInstruction {
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
+	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, IGarbageCollector garbageCollector) {
 		Reference reference1 = frame.pop();
 		Reference reference2 = frame.pop();
 		checkInteger(reference1);

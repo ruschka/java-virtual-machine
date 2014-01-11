@@ -1,5 +1,6 @@
 package enviroment;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +45,10 @@ public class ClassLoader {
 			CLASSES.put(clazz, reference);
 		}
 		return reference;
+	}
+	
+	public static Collection<Reference> getClassObjects() {
+		return CLASSES.values();
 	}
 
 }

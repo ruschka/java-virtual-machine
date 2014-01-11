@@ -1,5 +1,6 @@
 package instruction.array.store;
 
+import garbagecollector.IGarbageCollector;
 import instruction.AbstractInstruction;
 import object.ArrayObject;
 import object.IntegerObject;
@@ -10,7 +11,7 @@ import enviroment.Heap;
 public abstract class AbstractArrayStoreInstruction extends AbstractInstruction {
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
+	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, IGarbageCollector garbageCollector) {
 		Reference valueReference = frame.pop();
 		Reference indexReference = frame.pop();
 		Reference arrayReference = frame.pop();

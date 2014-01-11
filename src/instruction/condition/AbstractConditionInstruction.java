@@ -2,12 +2,13 @@ package instruction.condition;
 
 import enviroment.Frame;
 import enviroment.Heap;
+import garbagecollector.IGarbageCollector;
 import instruction.AbstractInstruction;
 
 public abstract class AbstractConditionInstruction extends AbstractInstruction {
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
+	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, IGarbageCollector garbageCollector) {
 		short offset = getShortFromNextTwoBytes(bytecode, bytecodeIndex);
 		if (evaluateCondition(frame)) {
 			return bytecodeIndex + offset;

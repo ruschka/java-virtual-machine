@@ -1,5 +1,6 @@
 package instruction.util;
 
+import garbagecollector.IGarbageCollector;
 import instruction.AbstractInstruction;
 import object.IntegerObject;
 import object.SimulatedString;
@@ -22,7 +23,7 @@ public class LdcInstruction extends AbstractInstruction {
 	}
 
 	@Override
-	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex) {
+	public int run(Frame frame, Heap heap, byte[] bytecode, int bytecodeIndex, IGarbageCollector garbageCollector) {
 		int index = getIntegerFromNextByte(bytecode, bytecodeIndex);
 		Constant constant = frame.getConstant(index);
 		if (constant instanceof ConstantString) {
