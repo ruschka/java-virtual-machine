@@ -28,7 +28,7 @@ public class InvokeStaticInstruction extends AbstractInstruction {
 		JavaClass clazz = ClassLoader.loadClass(methodInfo.className);
 		Method method = ClassLoader.getMethodByName(clazz, methodInfo.name, methodInfo.signature);
 		
-		Frame newFrame = new Frame(frame, clazz.getConstantPool(), method.getCode().getMaxLocals());
+		Frame newFrame = new Frame(frame, method.getConstantPool(), method.getCode().getMaxLocals());
 		// argumenty metody
 		for (int i = signatureInfo.argumentCount - 1; i >= 0; i--) {
 			newFrame.setLocal(i, frame.pop().getObject());
