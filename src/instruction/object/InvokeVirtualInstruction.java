@@ -54,7 +54,7 @@ public class InvokeVirtualInstruction extends AbstractInstruction {
 		Method method = ClassLoader.getMethodByName(clazz, methodInfo.name, methodInfo.signature);
 		
 		// pripravime novy frame
-		Frame newFrame = new Frame(frame, clazz.getConstantPool(), method.getCode().getMaxLocals());
+		Frame newFrame = new Frame(frame, method.getConstantPool(), method.getCode().getMaxLocals());
 		for (int i = signatureInfo.argumentCount; i > 0; i--) {
 			newFrame.setLocal(i, arguments.removeFirst().getObject());
 		}

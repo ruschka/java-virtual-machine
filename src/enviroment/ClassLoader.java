@@ -27,13 +27,20 @@ public class ClassLoader {
 	}
 	
 	public static Method getMethodByName(JavaClass clazz, String methodName, String methodSignature) {
+		if (clazz == null) {
+			throw new IllegalStateException("Method " + methodName + " not found.");
+		}
 		Method[] methods = clazz.getMethods();
 		for (Method method : methods) {
 			if (methodName.equals(method.getName()) && methodSignature.equals(method.getSignature())) {
 				return method;
 			}
 		}
-		throw new IllegalStateException("Method " + methodName + " not found.");
+		try {
+			return getMethodByName(clazz.getSuperClass(), methodName, methodSignature);
+		} catch (ClassNotFoundException e) {
+			throw new IllegalStateException("Method " + methodName + " not found.", e);
+		}
 	}
 	
 	public static Reference getClassObject(String clazz, Heap heap) {
